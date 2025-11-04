@@ -4,6 +4,7 @@ import ProyectosPage from './pages/ProyectosPage';
 import ServiciosPage from './pages/ServiciosPage';
 import EstudioPage from './pages/EstudioPage';
 import ContactoPage from './pages/ContactoPage';
+import { NavLink } from "react-router-dom";
 
 function App() {
   return (
