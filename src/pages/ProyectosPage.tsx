@@ -53,7 +53,7 @@ export default function ProyectosPage() {
         </div>
         
       </div>
-      <Footer />
+      
     </div>
     
   );
