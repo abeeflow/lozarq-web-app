@@ -10,6 +10,8 @@ function App() {
   return (
     <Router>
       <div className="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark antialiased">
+        
+        
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/proyectos" element={<ProyectosPage />} />
