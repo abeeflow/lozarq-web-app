@@ -1,12 +1,12 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-
+const teamImg = '/diseño2.png';
 export default function ContactoPage() {
   return (
     <div className="bg-background-light dark:bg-background-dark min-h-screen">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Header />
-        <main className="mt-12">
+        <main className="mt-20">
           <div className="mb-12">
             <h1 className="text-4xl sm:text-5xl font-black text-text-light dark:text-text-dark mb-4">
               Hablemos
@@ -43,11 +43,11 @@ export default function ContactoPage() {
                   </div>
                 </div>
               </div>
-              <div className="w-full h-64 md:h-80 rounded-xl overflow-hidden">
+              <div className="w-full h-60 md:h-60 rounded-xl overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800"
+                  src={teamImg}
                   alt="Mapa de ubicación"
-                  className="w-full h-full object-cover grayscale contrast-125"
+                  className="  object-cover grayscale "
                 />
               </div>
             </div>
@@ -110,6 +110,7 @@ export default function ContactoPage() {
         </main>
         <Footer />
       </div>
+      
     </div>
   );
 }

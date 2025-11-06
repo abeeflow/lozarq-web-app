@@ -16,7 +16,7 @@ export default function ServiciosPage() {
     <div className="bg-background-light dark:bg-background-dark min-h-screen">
       <div className="max-w-5xl mx-auto px-4 py-5">
         <Header />
-        <main className="mt-16">
+        <main className="mt-10 pt-20">
           <div className="text-center mb-16">
             <h1 className="text-4xl sm:text-5xl font-black text-text-light dark:text-text-dark mb-4">
               Nuestros Servicios
@@ -26,7 +26,7 @@ export default function ServiciosPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-0">
             {servicios.map((servicio, idx) => (
               <div
                 key={idx}
@@ -49,7 +49,7 @@ export default function ServiciosPage() {
             ))}
           </div>
 
-          <div className="text-center py-16">
+          <div className="text-center py-5">
             <h2 className="text-3xl sm:text-4xl font-bold text-text-light dark:text-text-dark mb-4">
               ¿Tienes una idea en mente?
             </h2>
@@ -62,10 +62,13 @@ export default function ServiciosPage() {
             >
               Iniciar un Proyecto
             </Link>
+            <Footer />
           </div>
+          
         </main>
-        <Footer />
+        
       </div>
+      
     </div>
   );
 }
