@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { FaInstagram } from "react-icons/fa";
+import { FaInstagram, FaFacebookF, FaTiktok  } from "react-icons/fa";
 
 // Reemplaza por tu imagen real (p.e. import teamImg from '../assets/estudio.jpg')
 const teamImg = '/foto_portadada_v2.jpg';
@@ -43,7 +43,6 @@ export default function EstudioPage() {
               <br />
               <br />
               <br />
-              <br />
               {/* Bloque de contacto */}
               <address className="not-italic space-y-1 text-sm">
                 <p className="font-semibold">
@@ -63,12 +62,12 @@ export default function EstudioPage() {
               </address>
               
               {/* Instagram */}
-              <div >
+              <div className="flex flex-col ">
                 <a
                   href="https://www.instagram.com/lozarqestudio/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-gray-700 hover:text-black transition-colors"
+                  className="flex items-center gap-2 text-sm text-gray-700 hover:text-black transition-colors mt-0"
                 >
                   <FaInstagram className="text-2xl" />
                   <span>
@@ -83,8 +82,16 @@ export default function EstudioPage() {
                   </span>
                 </a>
                 
-                <br />
-                 <a
+                <a
+                  href="https://www.facebook.com/lozarqestudio/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm text-gray-700 hover:text-black transition-colors mt-2"
+                
+                >
+                  <FaFacebookF className="text-2xl" />
+                  <span>
+                    <a
                   href="https://www.instagram.com/lozarqestudio/"
                   target="_blank"
                   rel="noreferrer"
@@ -92,8 +99,20 @@ export default function EstudioPage() {
                 >
                   FACEBOOK
                 </a>
-                <br />
+                  </span>
+                </a>
+
                  <a
+                  href="https://www.facebook.com/lozarqestudio/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm text-gray-700 hover:text-black transition-colors  mt-2"
+                
+                >
+                  <FaTiktok className="text-2xl" />
+
+                  <span>
+                    <a
                   href="https://www.instagram.com/lozarqestudio/"
                   target="_blank"
                   rel="noreferrer"
@@ -101,6 +120,10 @@ export default function EstudioPage() {
                 >
                   TIK-TOK
                 </a>
+                  </span>
+                </a>
+
+                 
                 
                 
               </div>
