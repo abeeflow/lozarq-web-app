@@ -84,7 +84,7 @@ export default function EstudioPage() {
               </div>
             </section>
             <aside className="lg:sticky lg:top-10 mt-12">
-              <figure className="w-full h-[55vh] sm:h-[65vh] lg:h-[82vh] overflow-hidden lg:max-h-screen">
+              <figure className="w-full h-[50vh] sm:h-[55vh] lg:h-[60vh] overflow-hidden">
                 <img
                   src={teamImg}
                   alt="Equipo Lozarq Estudio"
