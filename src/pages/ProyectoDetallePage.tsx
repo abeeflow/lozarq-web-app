@@ -2,7 +2,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-// Datos de proyectos (mismo array que ProyectosPage)
 const proyectos = [
   {
     id: 1,
@@ -99,7 +98,6 @@ export default function ProyectoDetallePage() {
           <br />
 
           <main className="mt-12">
-            {/* Botón Volver */}
             <button
               onClick={() => navigate('/proyectos')}
               className="flex items-center gap-2 text-primary hover:opacity-80 transition-opacity mb-8"
@@ -107,8 +105,6 @@ export default function ProyectoDetallePage() {
               <span className="material-symbols-outlined">arrow_back</span>
               <span className="font-medium">Volver a proyectos</span>
             </button>
-
-            {/* Encabezado del Proyecto */}
             <div className="mb-8">
               <h1 className="text-4xl md:text-5xl font-black text-text-light dark:text-text-dark mb-4">
                 {proyecto.titulo}
@@ -124,8 +120,6 @@ export default function ProyectoDetallePage() {
                 </div>
               </div>
             </div>
-
-            {/* Imagen Principal */}
             <div className="mb-12">
               <img
                 src={proyecto.img}
@@ -133,8 +127,6 @@ export default function ProyectoDetallePage() {
                 className="w-full h-[400px] md:h-[600px] object-cover rounded-2xl shadow-xl"
               />
             </div>
-
-            {/* Descripción */}
             <div className="mb-12">
               <h2 className="text-2xl md:text-3xl font-bold text-text-light dark:text-text-dark mb-4">
                 Descripción
@@ -143,8 +135,6 @@ export default function ProyectoDetallePage() {
                 {proyecto.descripcion}
               </p>
             </div>
-
-            {/* Galería */}
             {proyecto.galeria && proyecto.galeria.length > 1 && (
               <div className="mb-12">
                 <h2 className="text-2xl md:text-3xl font-bold text-text-light dark:text-text-dark mb-6">
@@ -162,8 +152,6 @@ export default function ProyectoDetallePage() {
                 </div>
               </div>
             )}
-
-            {/* Botón Volver (inferior) */}
             <div className="mt-12 text-center">
               <button
                 onClick={() => navigate('/proyectos')}

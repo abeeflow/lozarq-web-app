@@ -1,9 +1,7 @@
-// src/pages/EstudioPage.tsx
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { FaInstagram, FaFacebook, FaTiktok } from "react-icons/fa";
 
-// Reemplaza por tu imagen real (p.e. import teamImg from '../assets/estudio.jpg')
 const teamImg = '/foto_portadada_v2.jpg';
 
 export default function EstudioPage() {
@@ -12,9 +10,7 @@ export default function EstudioPage() {
       <div className="flex-1 mx-auto max-w-7xl px-4 md:px-6 lg:px-10">
         <Header />
         <main className="mt-24">
-          {/* Grid principal: texto a la izquierda, imagen a la derecha */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-            {/* Columna izquierda */}
             <section className="space-y-8 mt-18">
           
               <div className="space-y-5 max-w-xl leading-relaxed text-text-light dark:text-text-dark text-justify mt-12">
@@ -34,7 +30,6 @@ export default function EstudioPage() {
                 </p>
                 
               </div>
-              {/* Bloque de contacto */}
               <address className="not-italic space-y-1 text-sm">
                 <p className="font-semibold">
                   Trujillo <span className="mx-2">|</span> Lima 
@@ -51,8 +46,6 @@ export default function EstudioPage() {
                   <a href="tel:+51931103387" className="underline hover:opacity-80">+51 931 103 387</a>
                 </p>
               </address>
-              
-              {/* Redes sociales */}
               <div className="space-y-4">
                 <a
                   href="https://www.instagram.com/lozarqestudio/"
@@ -90,8 +83,6 @@ export default function EstudioPage() {
                 </a>
               </div>
             </section>
-
-            {/* Columna derecha: imagen grande */}
             <aside className="lg:sticky lg:top-10 mt-12">
               <figure className="w-full h-[55vh] sm:h-[65vh] lg:h-[82vh] overflow-hidden lg:max-h-screen">
                 <img
