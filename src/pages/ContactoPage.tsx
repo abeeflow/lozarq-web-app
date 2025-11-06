@@ -3,8 +3,8 @@ import Footer from '../components/Footer';
 const teamImg = '/diseño2.png';
 export default function ContactoPage() {
   return (
-    <div className="bg-background-light dark:bg-background-dark min-h-screen">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark">
+      <div className="flex-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Header />
         <main className="mt-20">
           <div className="mb-12">
@@ -108,9 +108,8 @@ export default function ContactoPage() {
             </div>
           </div>
         </main>
-        <Footer />
       </div>
-      
+      <Footer />
     </div>
   );
 }

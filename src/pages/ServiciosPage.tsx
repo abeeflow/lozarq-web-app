@@ -13,8 +13,8 @@ const servicios = [
 
 export default function ServiciosPage() {
   return (
-    <div className="bg-background-light dark:bg-background-dark min-h-screen">
-      <div className="max-w-5xl mx-auto px-4 py-5">
+    <div className="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark">
+      <div className="flex-1 max-w-5xl mx-auto px-4 py-5">
         <Header />
         <main className="mt-10 pt-20">
           <div className="text-center mb-16">
@@ -62,13 +62,12 @@ export default function ServiciosPage() {
             >
               Iniciar un Proyecto
             </Link>
-            <Footer />
           </div>
-          
+
         </main>
-        
+
       </div>
-      
+      <Footer />
     </div>
   );
 }
