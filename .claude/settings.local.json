@@ -3,7 +3,15 @@
     "allow": [
       "Bash(npm install:*)",
       "Bash(npm run dev:*)",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "Bash(npm run build:*)",
+      "Bash(curl:*)",
+      "Bash(taskkill:*)",
+      "Bash(cat:*)",
+      "Bash(nul)",
+      "Bash(exit 0)",
+      "Bash(if exist \"node_modules\\.vite\" rmdir /S /Q \"node_modules\\.vite\")",
+      "Bash(if exist \"dist\" rmdir /S /Q \"dist\")"
     ],
     "deny": [],
     "ask": []
