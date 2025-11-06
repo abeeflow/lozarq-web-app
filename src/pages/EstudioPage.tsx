@@ -1,8 +1,8 @@
 // src/pages/EstudioPage.tsx
-import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { FaInstagram } from "react-icons/fa";
+import { FaInstagram, FaFacebook, FaTiktok } from "react-icons/fa";
+
 
 // Reemplaza por tu imagen real (p.e. import teamImg from '../assets/estudio.jpg')
 const teamImg = '/foto_portadada_v2.jpg';
@@ -63,7 +63,7 @@ export default function EstudioPage() {
               </address>
               
               {/* Instagram */}
-              <div >
+              <div className="space-y-4">
                 <a
                   href="https://www.instagram.com/lozarqestudio/"
                   target="_blank"
@@ -73,39 +73,53 @@ export default function EstudioPage() {
                   <FaInstagram className="text-2xl" />
                   <span>
                     <a
-                  href="https://www.instagram.com/lozarqestudio/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-sm tracking-wide hover:opacity-80 underline"
-                >
-                  INSTAGRAM
+                      href="https://www.instagram.com/lozarqestudio/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-sm tracking-wide hover:opacity-80 underline"
+                    >
+                    INSTAGRAM
                 </a>
                   </span>
                 </a>
                 
-                <br />
-                 <a
-                  href="https://www.instagram.com/lozarqestudio/"
+                <a
+                  href="https://www.facebook.com/p/Lozarq-Estudio-100082969437663/"
                   target="_blank"
-                  rel="noreferrer"
-                  className="text-sm tracking-wide hover:opacity-80 underline"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm text-gray-700 hover:text-black transition-colors"
                 >
-                  FACEBOOK
+                  <FaFacebook className="text-2xl" />
+                  <span>
+                    <a
+                      href="https://www.facebook.com/p/Lozarq-Estudio-100082969437663/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-sm tracking-wide hover:opacity-80 underline"
+                    >
+                      FACEBOOK
+                    </a>
+                  </span>
                 </a>
-                <br />
-                 <a
-                  href="https://www.instagram.com/lozarqestudio/"
+                <a
+                  href="https://www.tiktok.com/@lozarq.estudio"
                   target="_blank"
-                  rel="noreferrer"
-                  className="text-sm tracking-wide hover:opacity-80 underline"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm text-gray-700 hover:text-black transition-colors"
                 >
-                  TIK-TOK
+                  <FaTiktok className="text-2xl" />
+                  <span>
+                    <a
+                      href="https://www.tiktok.com/@lozarq.estudio"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-sm tracking-wide hover:opacity-80 underline"
+                    >
+                      TIK-TOK
+                    </a>
+                  </span>
                 </a>
-                
-                
               </div>
-
-              
             </section>
 
             {/* Columna derecha: imagen grande */}
