@@ -9,7 +9,7 @@ export default function ContactoPage() {
         <main className="mt-20">
           <div className="mb-12">
             <h1 className="text-4xl sm:text-5xl font-black text-text-light dark:text-text-dark mb-4">
-              Hablemos
+              Contáctanos
             </h1>
             <p className="text-base text-text-light/70 dark:text-text-dark/70 max-w-md">
               Para nuevos proyectos, colaboraciones o consultas, por favor utiliza el siguiente formulario.
