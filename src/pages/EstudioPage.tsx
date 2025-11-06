@@ -2,9 +2,10 @@
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { FaInstagram } from "react-icons/fa";
 
 // Reemplaza por tu imagen real (p.e. import teamImg from '../assets/estudio.jpg')
-const teamImg = '/foto_portadada_v2.jpg';;
+const teamImg = '/foto_portadada_v2.jpg';
 
 export default function EstudioPage() {
   return (
@@ -12,14 +13,13 @@ export default function EstudioPage() {
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-10">
         <Header />
 
-        <main className="mt-16 lg:mt-24">
+        <main className="mt-24 ">
           {/* Grid principal: texto a la izquierda, imagen a la derecha */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
             {/* Columna izquierda */}
-            <section className="space-y-8">
-              <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight">LOZARQ STUDIO</h1>
-
-              <div className="space-y-5 max-w-xl leading-relaxed text-text-light dark:text-text-dark text-justify">
+            <section className="space-y-8 mt-18">
+          
+              <div className="space-y-5 max-w-xl leading-relaxed text-text-light dark:text-text-dark text-justify mt-12">
                 <p>
                   Lozarq Estudio es un estudio de arquitectura e interiorismo ubicado en Trujillo, 
                   especializado en diseñar y transformar espacios residenciales, comerciales y corporativos. 
@@ -36,6 +36,9 @@ export default function EstudioPage() {
                 </p>
                 
               </div>
+              <br />
+              <br />
+              <br />
               <br />
               <br />
               <br />
@@ -60,8 +63,16 @@ export default function EstudioPage() {
               </address>
               
               {/* Instagram */}
-              <div>
+              <div >
                 <a
+                  href="https://www.instagram.com/lozarqestudio/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm text-gray-700 hover:text-black transition-colors"
+                >
+                  <FaInstagram className="text-2xl" />
+                  <span>
+                    <a
                   href="https://www.instagram.com/lozarqestudio/"
                   target="_blank"
                   rel="noreferrer"
@@ -69,6 +80,9 @@ export default function EstudioPage() {
                 >
                   INSTAGRAM
                 </a>
+                  </span>
+                </a>
+                
                 <br />
                  <a
                   href="https://www.instagram.com/lozarqestudio/"
@@ -78,6 +92,16 @@ export default function EstudioPage() {
                 >
                   FACEBOOK
                 </a>
+                <br />
+                 <a
+                  href="https://www.instagram.com/lozarqestudio/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm tracking-wide hover:opacity-80 underline"
+                >
+                  TIK-TOK
+                </a>
+                
                 
               </div>
 
@@ -85,7 +109,7 @@ export default function EstudioPage() {
             </section>
 
             {/* Columna derecha: imagen grande */}
-            <aside className="lg:sticky lg:top-10">
+            <aside className="lg:sticky lg:top-10 mt-12">
               <figure className="w-full h-[55vh] sm:h-[65vh] lg:h-[82vh] overflow-hidden">
                 <img
                   src={teamImg}
@@ -97,10 +121,9 @@ export default function EstudioPage() {
           </div>
         </main>
 
-        <div className="mt-16 lg:mt-24">
-          
-        </div>
+        <Footer />
       </div>
+      
     </div>
   );
 }
