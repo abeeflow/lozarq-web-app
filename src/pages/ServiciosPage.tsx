@@ -40,9 +40,7 @@ export default function ServiciosPage() {
         <Header />
         <main className="mt-10 pt-20">
           <div className="text-center mb-16">
-            <h1 className="text-4xl sm:text-5xl font-black text-text-light dark:text-text-dark mb-4">
-              Nuestros Servicios
-            </h1>
+            
             <p className="text-base sm:text-lg text-text-light/70 dark:text-text-dark/70 max-w-3xl mx-auto">
               Combinamos creatividad y experiencia para transformar espacios.
             </p>
@@ -107,7 +105,7 @@ export default function ServiciosPage() {
           </div>
 
           <div className="text-center py-5">
-            <h2 className="text-3xl sm:text-4xl font-bold text-text-light dark:text-text-dark mb-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-600 dark:text-gray-300/70 mb-4">
               ¿Tienes una idea en mente?
             </h2>
             <p className="text-base text-text-light/70 dark:text-text-dark/70 mb-6 max-w-2xl mx-auto">
