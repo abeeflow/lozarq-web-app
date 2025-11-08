@@ -7,6 +7,7 @@ import ProyectoDetallePage from './pages/ProyectoDetallePage';
 import ServiciosPage from './pages/ServiciosPage';
 import EstudioPage from './pages/EstudioPage';
 import ContactoPage from './pages/ContactoPage';
+import ReservasPage from './pages/ReservasPage';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminProjectsIndex from './pages/admin/projects/index';
 import AdminProjectsCreate from './pages/admin/projects/create';
@@ -32,6 +33,7 @@ function App() {
           <Route path="/servicios" element={<PublicLayout><ServiciosPage /></PublicLayout>} />
           <Route path="/estudio" element={<PublicLayout><EstudioPage /></PublicLayout>} />
           <Route path="/contacto" element={<PublicLayout><ContactoPage /></PublicLayout>} />
+          <Route path="/reservas" element={<PublicLayout><ReservasPage /></PublicLayout>} />
 
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminLogin />} />
