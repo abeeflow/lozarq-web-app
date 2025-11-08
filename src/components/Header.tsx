@@ -90,6 +90,17 @@ export default function Header() {
             >
               Contacto
             </NavLink>
+
+            <NavLink
+              to="/reservas"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-sm font-bold tracking-wide text-primary border-b-2 border-primary transition-colors"
+                  : "text-sm font-medium tracking-wide text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary transition-colors"
+              }
+            >
+              Reservas
+            </NavLink>
           </nav>
 
           {/* Mobile Menu Toggle Button */}
@@ -190,6 +201,18 @@ export default function Header() {
                   }
                 >
                   Contacto
+                </NavLink>
+
+                <NavLink
+                  to="/reservas"
+                  onClick={closeMobileMenu}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-lg font-bold text-primary border-b-2 border-primary pb-2"
+                      : "text-lg font-medium text-text-light dark:text-text-dark hover:text-primary pb-2"
+                  }
+                >
+                  Reservas
                 </NavLink>
               </nav>
             </div>
