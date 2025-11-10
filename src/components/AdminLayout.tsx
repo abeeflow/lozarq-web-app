@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 interface AdminLayoutProps {
@@ -8,11 +8,16 @@ interface AdminLayoutProps {
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const navigate = useNavigate();
+  const location = useLocation();
   const { logout } = useAuth();
 
   const handleLogout = async () => {
     await logout();
     navigate('/admin');
+  };
+
+  const isActive = (path: string) => {
+    return location.pathname.startsWith(path);
   };
 
   return (
@@ -43,6 +48,30 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
               </span>
             </div>
 
+            {/* Navigation Links */}
+            <nav className="hidden md:flex items-center gap-4">
+              <Link
+                to="/admin/projects"
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                  isActive('/admin/projects')
+                    ? 'bg-primary text-white'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                }`}
+              >
+                📁 Proyectos
+              </Link>
+              <Link
+                to="/admin/bookings"
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                  isActive('/admin/bookings')
+                    ? 'bg-primary text-white'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                }`}
+              >
+                📅 Reservas
+              </Link>
+            </nav>
+
             {/* Logout Button */}
             <button
               onClick={handleLogout}
@@ -68,7 +97,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       </header>
 
       {/* Main Content */}
-      <main>{children}</main>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">{children}</main>
     </div>
   );
 }
