@@ -1,6 +1,5 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import CalendlyEmbed from '../components/CalendlyEmbed';
 
 export default function ContactoPage() {
   return (
@@ -11,22 +10,23 @@ export default function ContactoPage() {
           <main className="mt-20">
             {/* Page Title */}
             <div className="text-center mb-8">
-              <h1 className="text-3xl md:text-4xl font-bold text-text-light dark:text-text-dark mb-2">
-                Agenda una Reunión
-              </h1>
+              
               <p className="text-sm text-text-light/70 dark:text-text-dark/70">
                 Selecciona el día y hora que mejor te convenga
               </p>
             </div>
 
-            {/* Calendly Embed */}
-            <div className="w-full">
-              <CalendlyEmbed
-                styles={{
-                  height: '700px',
-                  minHeight: '700px',
-                }}
-              />
+            {/* Google Calendar Embed */}
+            <div className="w-full max-w-4xl mx-auto">
+              <div className="relative w-full overflow-hidden rounded-lg shadow-lg bg-white dark:bg-gray-800" style={{ paddingBottom: '75%', minHeight: '600px' }}>
+                <iframe
+                  src="https://calendar.app.google/xAaTLTvfjYkxqYXF6"
+                  className="absolute top-0 left-0 w-full h-full border-0"
+                  frameBorder="0"
+                  scrolling="yes"
+                  title="Agenda de disponibilidad"
+                />
+              </div>
             </div>
           </main>
         </div>
