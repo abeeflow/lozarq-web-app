@@ -6,7 +6,7 @@ export interface Project {
   fecha?: string;
   descripcion: string;
   galeria: string[];
-  categoria?: 'proyecto-1' | 'proyecto-2' | 'proyecto-3';
+  categoria?: 'interiores-vivienda' | 'infantil' | 'comercio';
   created_at: string;
   updated_at: string;
 }
@@ -18,7 +18,7 @@ export interface CreateProjectData {
   fecha?: string;
   descripcion: string;
   galeria: string[];
-  categoria?: 'proyecto-1' | 'proyecto-2' | 'proyecto-3';
+  categoria?: 'interiores-vivienda' | 'infantil' | 'comercio';
 }
 
 export interface UpdateProjectData {
@@ -28,5 +28,5 @@ export interface UpdateProjectData {
   fecha?: string;
   descripcion?: string;
   galeria?: string[];
-  categoria?: 'proyecto-1' | 'proyecto-2' | 'proyecto-3';
+  categoria?: 'interiores-vivienda' | 'infantil' | 'comercio';
 }
