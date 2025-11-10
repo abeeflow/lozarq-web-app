@@ -3,7 +3,6 @@ import { NavLink, Link } from "react-router-dom";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -23,15 +22,11 @@ export default function Header() {
             to="/"
             className="flex items-center gap-4 text-text-light dark:text-text-dark hover:opacity-80 transition-opacity"
           >
-            <a href="/" className="flex items-center gap-3">
-          <img
-            src="/Lozarq_Logotipo2.png"
-            alt="Lozarq Logo"
-            className="h-16 w-auto"
-          />
-
-        </a>
-
+            <img
+              src="/Lozarq_Logotipo2.png"
+              alt="Lozarq Logo"
+              className="h-16 w-auto"
+            />
           </Link>
 
           {/* Desktop Menu */}
@@ -59,55 +54,16 @@ export default function Header() {
               Proyectos
             </NavLink>
 
-            {/* Services Dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => setServicesDropdownOpen(true)}
-              onMouseLeave={() => setServicesDropdownOpen(false)}
+            <NavLink
+              to="/servicios"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-sm font-bold tracking-wide text-primary border-b-2 border-primary transition-colors"
+                  : "text-sm font-medium tracking-wide text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary transition-colors"
+              }
             >
-              <NavLink
-                to="/servicios"
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-sm font-bold tracking-wide text-primary border-b-2 border-primary transition-colors flex items-center gap-1"
-                    : "text-sm font-medium tracking-wide text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary transition-colors flex items-center gap-1"
-                }
-              >
-                Servicios
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </NavLink>
-
-              {/* Dropdown Menu */}
-              {servicesDropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
-                  <Link
-                    to="/servicios#servicio-1"
-                    className="block px-4 py-2 text-sm text-text-light dark:text-text-dark hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                  >
-                    Servicio 1
-                  </Link>
-                  <Link
-                    to="/servicios#servicio-2"
-                    className="block px-4 py-2 text-sm text-text-light dark:text-text-dark hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                  >
-                    Servicio 2
-                  </Link>
-                  <Link
-                    to="/servicios#servicio-3"
-                    className="block px-4 py-2 text-sm text-text-light dark:text-text-dark hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                  >
-                    Servicio 3
-                  </Link>
-                </div>
-              )}
-            </div>
+              Servicios
+            </NavLink>
 
             <NavLink
               to="/estudio"
@@ -196,42 +152,17 @@ export default function Header() {
                   Proyectos
                 </NavLink>
 
-                <div>
-                  <NavLink
-                    to="/servicios"
-                    onClick={closeMobileMenu}
-                    className={({ isActive }) =>
-                      isActive
-                        ? "text-lg font-bold text-primary border-b-2 border-primary pb-2"
-                        : "text-lg font-medium text-text-light dark:text-text-dark hover:text-primary pb-2"
-                    }
-                  >
-                    Servicios
-                  </NavLink>
-                  <div className="ml-4 mt-2 space-y-2">
-                    <Link
-                      to="/servicios#servicio-1"
-                      onClick={closeMobileMenu}
-                      className="block text-sm text-text-light/70 dark:text-text-dark/70 hover:text-primary"
-                    >
-                      → Servicio 1
-                    </Link>
-                    <Link
-                      to="/servicios#servicio-2"
-                      onClick={closeMobileMenu}
-                      className="block text-sm text-text-light/70 dark:text-text-dark/70 hover:text-primary"
-                    >
-                      → Servicio 2
-                    </Link>
-                    <Link
-                      to="/servicios#servicio-3"
-                      onClick={closeMobileMenu}
-                      className="block text-sm text-text-light/70 dark:text-text-dark/70 hover:text-primary"
-                    >
-                      → Servicio 3
-                    </Link>
-                  </div>
-                </div>
+                <NavLink
+                  to="/servicios"
+                  onClick={closeMobileMenu}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-lg font-bold text-primary border-b-2 border-primary pb-2"
+                      : "text-lg font-medium text-text-light dark:text-text-dark hover:text-primary pb-2"
+                  }
+                >
+                  Servicios
+                </NavLink>
 
                 <NavLink
                   to="/estudio"

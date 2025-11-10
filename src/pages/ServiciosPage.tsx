@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -7,32 +6,9 @@ const servicios = [
   { icono: 'architecture', titulo: 'Diseño Arquitectónico', desc: 'Creación de espacios residenciales y comerciales que son funcionales, sostenibles y estéticamente atractivos.' },
   { icono: 'landscape', titulo: 'Diseño de Paisaje', desc: 'Diseño de entornos exteriores que armonizan con la arquitectura y la naturaleza.' },
   { icono: 'chair', titulo: 'Diseño de Interiores', desc: 'Transformación de interiores para reflejar tu estilo y mejorar la funcionalidad.' },
-  { icono: 'holiday_village', titulo: 'Urbanismo y Master Planning', desc: 'Planificación a gran escala para desarrollar comunidades sostenibles.' },
-  { icono: 'ballot', titulo: 'Gestión de Proyectos', desc: 'Aseguramos que cada fase del proyecto se ejecute a la perfección.' },
-  { icono: 'lightbulb', titulo: 'Consultoría de Diseño', desc: 'Asesoramiento experto para optimizar tus ideas y maximizar el potencial.' },
 ];
 
 export default function ServiciosPage() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 3;
-  const totalPages = Math.ceil(servicios.length / itemsPerPage);
-
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % totalPages);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + totalPages) % totalPages);
-  };
-
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
-  };
-
-  const getCurrentPageServices = () => {
-    const start = currentIndex * itemsPerPage;
-    return servicios.slice(start, start + itemsPerPage);
-  };
 
   return (
     <div className="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark">
@@ -46,62 +22,29 @@ export default function ServiciosPage() {
             </p>
           </div>
 
-          <div className="flex items-center gap-8 mb-8">
-            <button
-              onClick={prevSlide}
-              className="flex-shrink-0 text-text-light dark:text-text-dark hover:text-primary transition-colors"
-              aria-label="Página anterior"
-            >
-              <span className="material-symbols-outlined" style={{ fontSize: '32px' }}>chevron_left</span>
-            </button>
-
-            <div className="flex-1 overflow-hidden">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-opacity duration-500">
-                {getCurrentPageServices().map((servicio, idx) => (
-                  <div
-                    key={currentIndex * itemsPerPage + idx}
-                    className="flex flex-col items-center gap-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-background-light dark:bg-background-dark p-6 hover:shadow-lg transition-shadow"
-                  >
-                    <div className="text-primary">
-                      <span className="material-symbols-outlined" style={{ fontSize: '40px' }}>
-                        {servicio.icono}
-                      </span>
-                    </div>
-                    <div className="text-center">
-                      <h2 className="text-xl font-bold text-text-light dark:text-text-dark mb-3">
-                        {servicio.titulo}
-                      </h2>
-                      <p className="text-sm text-text-light/70 dark:text-text-dark/70">
-                        {servicio.desc}
-                      </p>
-                    </div>
+          <div className="mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {servicios.map((servicio, idx) => (
+                <div
+                  key={idx}
+                  className="flex flex-col items-center gap-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-background-light dark:bg-background-dark p-6 hover:shadow-lg transition-shadow"
+                >
+                  <div className="text-primary">
+                    <span className="material-symbols-outlined" style={{ fontSize: '40px' }}>
+                      {servicio.icono}
+                    </span>
                   </div>
-                ))}
-              </div>
+                  <div className="text-center">
+                    <h2 className="text-xl font-bold text-text-light dark:text-text-dark mb-3">
+                      {servicio.titulo}
+                    </h2>
+                    <p className="text-sm text-text-light/70 dark:text-text-dark/70">
+                      {servicio.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
-
-            <button
-              onClick={nextSlide}
-              className="flex-shrink-0 text-text-light dark:text-text-dark hover:text-primary transition-colors"
-              aria-label="Página siguiente"
-            >
-              <span className="material-symbols-outlined" style={{ fontSize: '32px' }}>chevron_right</span>
-            </button>
-          </div>
-
-          <div className="flex justify-center gap-2 mb-8">
-            {Array.from({ length: totalPages }).map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => goToSlide(idx)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  idx === currentIndex
-                    ? 'bg-primary w-6'
-                    : 'bg-gray-300 dark:bg-gray-600'
-                }`}
-                aria-label={`Ir a la página ${idx + 1}`}
-              />
-            ))}
           </div>
 
           <div className="text-center py-5">
