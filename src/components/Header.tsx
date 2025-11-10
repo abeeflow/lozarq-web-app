@@ -85,24 +85,24 @@ export default function Header() {
 
               {/* Dropdown Menu */}
               {projectsDropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
+                <div className="absolute top-full left-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
                   <Link
-                    to="/proyectos?categoria=proyecto-1"
+                    to="/proyectos?categoria=interiores-vivienda"
                     className="block px-4 py-2 text-sm text-text-light dark:text-text-dark hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   >
-                    Proyecto 1
+                    Interiores de vivienda
                   </Link>
                   <Link
-                    to="/proyectos?categoria=proyecto-2"
+                    to="/proyectos?categoria=infantil"
                     className="block px-4 py-2 text-sm text-text-light dark:text-text-dark hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   >
-                    Proyecto 2
+                    Infantil
                   </Link>
                   <Link
-                    to="/proyectos?categoria=proyecto-3"
+                    to="/proyectos?categoria=comercio"
                     className="block px-4 py-2 text-sm text-text-light dark:text-text-dark hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   >
-                    Proyecto 3
+                    Comercio
                   </Link>
                 </div>
               )}
@@ -208,25 +208,25 @@ export default function Header() {
                   </NavLink>
                   <div className="ml-4 mt-2 space-y-2">
                     <Link
-                      to="/proyectos?categoria=proyecto-1"
+                      to="/proyectos?categoria=interiores-vivienda"
                       onClick={closeMobileMenu}
                       className="block text-sm text-text-light/70 dark:text-text-dark/70 hover:text-primary"
                     >
-                      → Proyecto 1
+                      → Interiores de vivienda
                     </Link>
                     <Link
-                      to="/proyectos?categoria=proyecto-2"
+                      to="/proyectos?categoria=infantil"
                       onClick={closeMobileMenu}
                       className="block text-sm text-text-light/70 dark:text-text-dark/70 hover:text-primary"
                     >
-                      → Proyecto 2
+                      → Infantil
                     </Link>
                     <Link
-                      to="/proyectos?categoria=proyecto-3"
+                      to="/proyectos?categoria=comercio"
                       onClick={closeMobileMenu}
                       className="block text-sm text-text-light/70 dark:text-text-dark/70 hover:text-primary"
                     >
-                      → Proyecto 3
+                      → Comercio
                     </Link>
                   </div>
                 </div>

@@ -22,13 +22,14 @@ export default function AdminProjectsCreate() {
     ubicacion: '',
     fecha: '',
     descripcion: '',
+    categoria: '' as 'interiores-vivienda' | 'infantil' | 'comercio' | '',
   });
 
   const [files, setFiles] = useState<FilePreview[]>([]);
   const [uploadProgress, setUploadProgress] = useState<string>('');
 
   const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -87,6 +88,7 @@ export default function AdminProjectsCreate() {
         fecha: formData.fecha,
         descripcion: formData.descripcion,
         galeria: uploadResults.map((r) => r.url),
+        categoria: formData.categoria || undefined,
       });
 
       // Cleanup previews
@@ -186,6 +188,24 @@ export default function AdminProjectsCreate() {
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
+            </div>
+
+            <div>
+              <label htmlFor="categoria" className="block text-sm font-medium text-gray-700 mb-2">
+                Categoría
+              </label>
+              <select
+                id="categoria"
+                name="categoria"
+                value={formData.categoria}
+                onChange={handleInputChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option value="">Sin categoría</option>
+                <option value="interiores-vivienda">Interiores de vivienda</option>
+                <option value="infantil">Infantil</option>
+                <option value="comercio">Comercio</option>
+              </select>
             </div>
 
             <div>
