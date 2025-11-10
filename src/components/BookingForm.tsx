@@ -153,7 +153,7 @@ export default function BookingForm({ onSuccess }: BookingFormProps) {
     <div className="w-full">
       {/* Progress Indicator */}
       {step !== 4 && (
-        <div className="mb-12 max-w-xl mx-auto">
+        <div className="mb-12 max-w-3xl mx-auto">
           <div className="flex items-center justify-between mb-3">
             {[1, 2, 3].map((s) => (
               <div
@@ -174,14 +174,14 @@ export default function BookingForm({ onSuccess }: BookingFormProps) {
 
       {/* Error Message */}
       {error && (
-        <div className="mb-8 max-w-xl mx-auto p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-400 text-sm">
+        <div className="mb-8 max-w-3xl mx-auto p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-400 text-sm">
           {error}
         </div>
       )}
 
       {/* Step 1: Personal Data */}
       {step === 1 && (
-        <div className="max-w-xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
               Información Personal
@@ -191,70 +191,72 @@ export default function BookingForm({ onSuccess }: BookingFormProps) {
             </p>
           </div>
 
-          <div className="space-y-5 bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-gray-700">
-            <div>
-              <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Nombre completo
-              </label>
-              <input
-                type="text"
-                id="nombre"
-                name="nombre"
-                value={formData.nombre}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary/50 focus:border-primary bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-all"
-                placeholder="Juan Pérez"
-              />
-            </div>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-gray-700">
+            <div className="grid md:grid-cols-2 gap-5 mb-5">
+              <div>
+                <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Nombre completo
+                </label>
+                <input
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  value={formData.nombre}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary/50 focus:border-primary bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-all"
+                  placeholder="Juan Pérez"
+                />
+              </div>
 
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary/50 focus:border-primary bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-all"
-                placeholder="juan@ejemplo.com"
-              />
-            </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary/50 focus:border-primary bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-all"
+                  placeholder="juan@ejemplo.com"
+                />
+              </div>
 
-            <div>
-              <label htmlFor="telefono" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Teléfono
-              </label>
-              <input
-                type="tel"
-                id="telefono"
-                name="telefono"
-                value={formData.telefono}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary/50 focus:border-primary bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-all"
-                placeholder="+1 234 567 8900"
-              />
-            </div>
+              <div>
+                <label htmlFor="telefono" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Teléfono
+                </label>
+                <input
+                  type="tel"
+                  id="telefono"
+                  name="telefono"
+                  value={formData.telefono}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary/50 focus:border-primary bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-all"
+                  placeholder="+1 234 567 8900"
+                />
+              </div>
 
-            <div>
-              <label htmlFor="servicio" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Servicio (opcional)
-              </label>
-              <input
-                type="text"
-                id="servicio"
-                name="servicio"
-                value={formData.servicio}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary/50 focus:border-primary bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-all"
-                placeholder="Consultoría, Diseño, etc."
-              />
+              <div>
+                <label htmlFor="servicio" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Servicio (opcional)
+                </label>
+                <input
+                  type="text"
+                  id="servicio"
+                  name="servicio"
+                  value={formData.servicio}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary/50 focus:border-primary bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-all"
+                  placeholder="Consultoría, Diseño, etc."
+                />
+              </div>
             </div>
 
             <button
               onClick={handleNextStep}
-              className="w-full px-6 py-4 bg-primary text-white rounded-xl hover:bg-primary/90 transition-all font-medium shadow-lg shadow-primary/20 mt-2"
+              className="w-full px-6 py-4 bg-primary text-white rounded-xl hover:bg-primary/90 transition-all font-medium shadow-lg shadow-primary/20"
             >
               Continuar
             </button>
@@ -264,7 +266,7 @@ export default function BookingForm({ onSuccess }: BookingFormProps) {
 
       {/* Step 2: Date Selection */}
       {step === 2 && (
-        <div className="max-w-xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
               Selecciona una Fecha
@@ -309,7 +311,7 @@ export default function BookingForm({ onSuccess }: BookingFormProps) {
 
       {/* Step 3: Time Selection */}
       {step === 3 && (
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
               Selecciona una Hora
@@ -330,7 +332,7 @@ export default function BookingForm({ onSuccess }: BookingFormProps) {
                 No hay horarios disponibles para esta fecha
               </div>
             ) : (
-              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-3">
                 {timeSlots
                   .filter((slot) => slot.available)
                   .map((slot) => (
