@@ -11,6 +11,7 @@ import AdminLogin from './pages/admin/AdminLogin';
 import AdminProjectsIndex from './pages/admin/projects/index';
 import AdminProjectsCreate from './pages/admin/projects/create';
 import AdminProjectsEdit from './pages/admin/projects/edit';
+import AdminBookingsIndex from './pages/admin/bookings/index';
 
 function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/admin/projects" element={<ProtectedRoute><AdminProjectsIndex /></ProtectedRoute>} />
           <Route path="/admin/projects/create" element={<ProtectedRoute><AdminProjectsCreate /></ProtectedRoute>} />
           <Route path="/admin/projects/:id/edit" element={<ProtectedRoute><AdminProjectsEdit /></ProtectedRoute>} />
+          <Route path="/admin/bookings" element={<ProtectedRoute><AdminBookingsIndex /></ProtectedRoute>} />
         </Routes>
       </Router>
     </AuthProvider>
