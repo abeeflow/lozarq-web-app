@@ -60,14 +60,16 @@ export default function CalendlyEmbed({
   };
 
   return (
-    <div className="calendly-embed-container">
+    <div className="calendly-embed-container w-full">
       <div
         className="calendly-inline-widget"
         data-url={buildUrl()}
         style={{
           minWidth: '320px',
+          width: '100%',
           height: styles.height || 'auto',
           minHeight: styles.minHeight || '700px',
+          overflow: 'hidden',
           ...styles
         }}
       />
