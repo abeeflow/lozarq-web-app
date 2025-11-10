@@ -18,11 +18,11 @@ export default function ContactoPage() {
             </div>
 
             {/* Calendly Embed - Ocupa espacio disponible */}
-            <div className="flex-1 w-full" style={{ minHeight: '600px' }}>
+            <div className="flex-1 w-full" style={{ minHeight: '900px' }}>
               <CalendlyEmbed
                 styles={{
                   height: '100%',
-                  minHeight: '600px',
+                  minHeight: '900px',
                 }}
               />
             </div>

@@ -66,8 +66,8 @@ export default function CalendlyEmbed({
       style={{
         minWidth: '320px',
         width: '100%',
-        height: styles.height || '700px',
-        minHeight: styles.minHeight || '600px',
+        height: styles.height || '900px',
+        minHeight: styles.minHeight || '900px',
         ...styles
       }}
     />
