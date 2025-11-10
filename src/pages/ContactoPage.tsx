@@ -20,7 +20,7 @@ export default function ContactoPage() {
             <div className="w-full max-w-4xl mx-auto">
               <div className="relative w-full overflow-hidden rounded-lg shadow-lg bg-white dark:bg-gray-800" style={{ paddingBottom: '75%', minHeight: '600px' }}>
                 <iframe
-                  src="https://calendar.app.google/xAaTLTvfjYkxqYXF6"
+                  src="https://calendar.app.google/21RBPrPcN4D63N9f9"
                   className="absolute top-0 left-0 w-full h-full border-0"
                   frameBorder="0"
                   scrolling="yes"
