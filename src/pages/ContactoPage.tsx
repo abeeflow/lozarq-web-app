@@ -5,28 +5,30 @@ import CalendlyEmbed from '../components/CalendlyEmbed';
 export default function ContactoPage() {
   return (
     <div className="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark">
-      <Header />
+      <div className="flex-1 flex flex-col px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 py-5">
+        <div className="w-full max-w-[1280px] mx-auto flex-1 flex flex-col">
+          <Header />
 
-      {/* Calendly Full Width Container */}
-      <main className="flex-1 w-full mt-20 pb-8">
-        {/* Page Title */}
-        <div className="text-center mb-6 px-4">
-          <h1 className="text-3xl md:text-4xl font-bold text-text-light dark:text-text-dark mb-2">
-            Agenda una Reunión
-          </h1>
+          <main className="flex-1 flex flex-col mt-20">
+            {/* Page Title */}
+            <div className="text-center mb-6">
+              <h1 className="text-3xl md:text-4xl font-bold text-text-light dark:text-text-dark mb-2">
+                Agenda una Reunión
+              </h1>
+            </div>
+
+            {/* Calendly Embed - Ocupa espacio disponible */}
+            <div className="flex-1 w-full" style={{ minHeight: '600px' }}>
+              <CalendlyEmbed
+                styles={{
+                  height: '100%',
+                  minHeight: '600px',
+                }}
+              />
+            </div>
+          </main>
         </div>
-
-        {/* Calendly Embed - Completamente sin restricciones */}
-        <div className="w-full px-0">
-          <CalendlyEmbed
-            styles={{
-              minHeight: '1100px',
-              height: '1100px',
-            }}
-          />
-        </div>
-      </main>
-
+      </div>
       <Footer />
     </div>
   );
