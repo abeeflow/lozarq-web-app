@@ -60,19 +60,16 @@ export default function CalendlyEmbed({
   };
 
   return (
-    <div className="calendly-embed-container w-full">
-      <div
-        className="calendly-inline-widget"
-        data-url={buildUrl()}
-        style={{
-          minWidth: '320px',
-          width: '100%',
-          height: styles.height || 'auto',
-          minHeight: styles.minHeight || '700px',
-          overflow: 'hidden',
-          ...styles
-        }}
-      />
-    </div>
+    <div
+      className="calendly-inline-widget"
+      data-url={buildUrl()}
+      style={{
+        minWidth: '320px',
+        width: '100%',
+        height: styles.height || '1100px',
+        minHeight: styles.minHeight || '1100px',
+        ...styles
+      }}
+    />
   );
 }
