@@ -26,11 +26,12 @@ export default function AdminProjectsEdit() {
     ubicacion: '',
     fecha: '',
     descripcion: '',
-    categoria: '' as 'interiores-vivienda' | 'infantil' | 'comercio' | '',
+    categoria: '' as 'Residencial' | 'Infantil' | 'Comercial' | 'Corporativo' | '',
   });
 
   const [existingGallery, setExistingGallery] = useState<string[]>([]);
   const [newFiles, setNewFiles] = useState<FilePreview[]>([]);
+  const [selectedCoverIndex, setSelectedCoverIndex] = useState<number | null>(null);
   const [uploadProgress, setUploadProgress] = useState<string>('');
 
   useEffect(() => {
@@ -44,6 +45,13 @@ export default function AdminProjectsEdit() {
         categoria: project.categoria || '',
       });
       setExistingGallery(project.galeria);
+      // Find current cover index
+      if (project.img && project.galeria.length > 0) {
+        const coverIndex = project.galeria.findIndex(url => url === project.img);
+        if (coverIndex !== -1) {
+          setSelectedCoverIndex(coverIndex);
+        }
+      }
     }
   }, [project]);
 
@@ -87,8 +95,22 @@ export default function AdminProjectsEdit() {
       // Remove from storage
       await storageService.deleteFile(path);
 
+      // Find the index of the removed image
+      const removedIndex = existingGallery.findIndex(u => u === url);
+
       // Update state
       setExistingGallery((prev) => prev.filter((u) => u !== url));
+
+      // Adjust selected cover index if necessary
+      if (selectedCoverIndex !== null) {
+        if (selectedCoverIndex === removedIndex) {
+          // If removed image was the cover, reset to default (first image)
+          setSelectedCoverIndex(null);
+        } else if (selectedCoverIndex > removedIndex) {
+          // If removed image was before the cover, decrement the index
+          setSelectedCoverIndex(selectedCoverIndex - 1);
+        }
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to remove file');
     }
@@ -121,11 +143,16 @@ export default function AdminProjectsEdit() {
         galleryUrls = [...galleryUrls, ...uploadResults.map((r) => r.url)];
       }
 
+      // Determine cover image: use selected or first image
+      const coverImage = selectedCoverIndex !== null
+        ? galleryUrls[selectedCoverIndex]
+        : galleryUrls[0] || '';
+
       // Update project
       setUploadProgress('Updating project...');
       await projectService.update(Number(id), {
         titulo: formData.titulo,
-        img: formData.img,
+        img: coverImage,
         ubicacion: formData.ubicacion,
         fecha: formData.fecha,
         descripcion: formData.descripcion,
@@ -217,20 +244,6 @@ export default function AdminProjectsEdit() {
               />
             </div>
 
-            <div>
-              <label htmlFor="img" className="block text-sm font-medium text-gray-700 mb-2">
-                Imagen principal (URL)
-              </label>
-              <input
-                type="text"
-                id="img"
-                name="img"
-                value={formData.img}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="URL de la imagen principal"
-              />
-            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -275,9 +288,10 @@ export default function AdminProjectsEdit() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 <option value="">Sin categoría</option>
-                <option value="interiores-vivienda">Interiores de vivienda</option>
-                <option value="infantil">Infantil</option>
-                <option value="comercio">Comercio</option>
+                <option value="Residencial">Residencial</option>
+                <option value="Infantil">Infantil</option>
+                <option value="Comercial">Comercial</option>
+                <option value="Corporativo">Corporativo</option>
               </select>
             </div>
 
@@ -301,20 +315,49 @@ export default function AdminProjectsEdit() {
           {existingGallery.length > 0 && (
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-sm font-medium text-gray-700 mb-4">Current Gallery</h3>
+              <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                <p className="text-sm text-blue-800">
+                  <strong>Portada:</strong> {selectedCoverIndex !== null && selectedCoverIndex < existingGallery.length
+                    ? `Imagen ${selectedCoverIndex + 1}`
+                    : 'Primera imagen (por defecto)'}
+                </p>
+                <p className="text-xs text-blue-600 mt-1">
+                  Haz clic en una imagen para seleccionarla como portada
+                </p>
+              </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 {existingGallery.map((url, index) => (
                   <div key={index} className="relative group">
-                    <div className="aspect-square rounded-lg overflow-hidden bg-gray-100">
+                    <div
+                      className={`aspect-square rounded-lg overflow-hidden bg-gray-100 cursor-pointer border-4 transition-all ${
+                        selectedCoverIndex === index
+                          ? 'border-blue-500 shadow-lg'
+                          : 'border-transparent hover:border-blue-300'
+                      }`}
+                      onClick={() => setSelectedCoverIndex(index)}
+                    >
                       {url.endsWith('.mp4') ? (
                         <video src={url} className="w-full h-full object-cover" muted />
                       ) : (
                         <img src={url} alt="" className="w-full h-full object-cover" />
                       )}
+                      {selectedCoverIndex === index && (
+                        <div className="absolute inset-0 bg-blue-500/20 flex items-center justify-center">
+                          <div className="bg-blue-500 text-white rounded-full p-2">
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                            </svg>
+                          </div>
+                        </div>
+                      )}
                     </div>
                     <button
                       type="button"
-                      onClick={() => removeExistingFile(url)}
-                      className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        removeExistingFile(url);
+                      }}
+                      className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity z-10"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path
