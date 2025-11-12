@@ -73,29 +73,29 @@ export default function ProyectoDetailPage() {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark">
-      <div className="flex-1 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 py-5">
+      <div className="flex-1 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 pt-3 pb-5">
         <div className="max-w-[1280px] mx-auto">
           <Header />
 
-          <main className="mt-24 relative z-10">
+          <main className="mt-8 relative z-10">
             {/* Back Button */}
             <button
               onClick={handleBack}
-              className="mb-6 inline-flex items-center gap-2 text-primary hover:underline cursor-pointer bg-transparent border-0 p-2 -ml-2 relative z-20"
+              className="mb-4 -mt-3 inline-flex items-center gap-2 text-primary text-sm hover:underline cursor-pointer bg-transparent border-0 p-1.5 -ml-2 relative z-20"
               type="button"
             >
               ← Volver al listado
             </button>
 
             {/* Project Title */}
-            <h1 className="text-4xl md:text-5xl font-black text-text-light dark:text-text-dark mb-4">
+            <h1 className="text-sm font-light uppercase text-text-light dark:text-text-dark mb-4">
               {project.titulo}
             </h1>
 
             {/* Category */}
             {project.categoria && (
               <div className="mb-6">
-                <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-xs font-semibold uppercase tracking-wider">
+                <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-xs font-light uppercase tracking-wider">
                   {project.categoria}
                 </span>
               </div>
@@ -120,20 +120,20 @@ export default function ProyectoDetailPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               {project.ubicacion && (
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-2">
+                  <h3 className="text-sm font-light text-gray-500 dark:text-gray-400 uppercase mb-2">
                     Ubicación
                   </h3>
-                  <p className="text-lg text-text-light dark:text-text-dark">
+                  <p className="text-base text-text-light dark:text-text-dark">
                     {project.ubicacion}
                   </p>
                 </div>
               )}
               {project.fecha && (
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase mb-2">
+                  <h3 className="text-sm font-light text-gray-500 dark:text-gray-400 uppercase mb-2">
                     Fecha
                   </h3>
-                  <p className="text-lg text-text-light dark:text-text-dark">
+                  <p className="text-base text-text-light dark:text-text-dark">
                     {new Date(project.fecha).toLocaleDateString('es-ES', {
                       year: 'numeric',
                       month: 'long',
@@ -146,7 +146,7 @@ export default function ProyectoDetailPage() {
 
             {/* Description */}
             <div className="mb-12">
-              <h3 className="text-2xl font-bold text-text-light dark:text-text-dark mb-4">
+              <h3 className="text-xl font-light text-text-light dark:text-text-dark mb-4">
                 Descripción
               </h3>
               <p className="text-lg text-gray-700 dark:text-gray-300 whitespace-pre-line">
@@ -157,7 +157,7 @@ export default function ProyectoDetailPage() {
             {/* Gallery */}
             {project.galeria.length > 0 && (
               <div>
-                <h3 className="text-2xl font-bold text-text-light dark:text-text-dark mb-6">
+                <h3 className="text-xl font-light text-text-light dark:text-text-dark mb-6">
                   Galería
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
