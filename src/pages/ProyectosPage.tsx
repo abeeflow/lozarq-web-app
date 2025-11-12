@@ -29,8 +29,8 @@ export default function ProyectosPage() {
         <div className="max-w-[1280px] mx-auto h-full min-h-0">
           <main className="h-full flex flex-col">
             {!showCategories && (
-              <h1 className="text-4xl md:text-5xl font-black text-text-light dark:text-text-dark mb-8">
-                {categoria}
+              <h1 className="text-sm font-black text-text-light dark:text-text-dark mb-8">
+                {categoria && categoria.toLowerCase() === 'infantil' ? categoria.toUpperCase() : categoria}
               </h1>
             )}
 
@@ -103,12 +103,12 @@ export default function ProyectosPage() {
                             className="w-full h-full object-cover"
                             loading="lazy"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-8">
-                            <h3 className="text-white text-2xl md:text-3xl font-bold mb-3">
+                          <div className="absolute bottom-0 left-0 right-0 bg-white px-6 md:px-8 py-4 md:py-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto shadow-sm">
+                            <h3 className={`text-text-light dark:text-text-dark text-xs font-light mb-3 ${categoria && categoria.toLowerCase() === 'infantil' ? 'uppercase' : ''}`}>
                               {proyecto.titulo}
                             </h3>
-                            <div className="flex items-center gap-2 text-white/90 group-hover:text-white transition-colors">
-                              <span className="text-sm md:text-base">Ver Proyecto</span>
+                            <div className="flex items-center gap-2 text-text-light dark:text-text-dark transition-colors">
+                              <span className="text-[11px] font-light">Ver Proyecto</span>
                               <svg
                                 className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
                                 fill="none"
