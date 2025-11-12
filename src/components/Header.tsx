@@ -1,10 +1,8 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [projectsDropdownOpen, setProjectsDropdownOpen] = useState(false);
-  const dropdownTimeoutRef = useRef<number | null>(null);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -12,19 +10,6 @@ export default function Header() {
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
-  };
-
-  const handleMouseEnterProjects = () => {
-    if (dropdownTimeoutRef.current) {
-      clearTimeout(dropdownTimeoutRef.current);
-    }
-    setProjectsDropdownOpen(true);
-  };
-
-  const handleMouseLeaveProjects = () => {
-    dropdownTimeoutRef.current = window.setTimeout(() => {
-      setProjectsDropdownOpen(false);
-    }, 300);
   };
 
   return (
@@ -158,42 +143,17 @@ export default function Header() {
                   Home
                 </NavLink>
 
-                <div>
-                  <NavLink
-                    to="/proyectos"
-                    onClick={closeMobileMenu}
-                    className={({ isActive }) =>
-                      isActive
-                        ? "text-xl font-bold text-primary border-b-2 border-primary pb-2 uppercase"
-                        : "text-xl font-medium text-text-light dark:text-text-dark hover:text-primary pb-2 uppercase"
-                    }
-                  >
-                    Proyectos
-                  </NavLink>
-                  <div className="ml-4 mt-2 space-y-2">
-                    <Link
-                      to="/proyectos?categoria=interiores-vivienda"
-                      onClick={closeMobileMenu}
-                      className="block text-sm text-text-light/70 dark:text-text-dark/70 hover:text-primary"
-                    >
-                      → Interiores de vivienda
-                    </Link>
-                    <Link
-                      to="/proyectos?categoria=infantil"
-                      onClick={closeMobileMenu}
-                      className="block text-sm text-text-light/70 dark:text-text-dark/70 hover:text-primary"
-                    >
-                      → Infantil
-                    </Link>
-                    <Link
-                      to="/proyectos?categoria=comercio"
-                      onClick={closeMobileMenu}
-                      className="block text-sm text-text-light/70 dark:text-text-dark/70 hover:text-primary"
-                    >
-                      → Comercio
-                    </Link>
-                  </div>
-                </div>
+                <NavLink
+                  to="/proyectos"
+                  onClick={closeMobileMenu}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-xl font-bold text-primary border-b-2 border-primary pb-2 uppercase"
+                      : "text-xl font-medium text-text-light dark:text-text-dark hover:text-primary pb-2 uppercase"
+                  }
+                >
+                  Proyectos
+                </NavLink>
 
                 <NavLink
                   to="/servicios"

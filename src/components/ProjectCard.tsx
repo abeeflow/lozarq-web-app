@@ -6,18 +6,22 @@ interface ProjectCardProps {
   categoriaTitulo?: string;
   img: string;
   size?: string;
+  customLink?: string;
 }
 
-export default function ProjectCard({ id, titulo, categoriaTitulo, img, size = '' }: ProjectCardProps) {
+export default function ProjectCard({ id, titulo, categoriaTitulo, img, size = '', customLink }: ProjectCardProps) {
+  const linkTo = customLink || `/proyectos/${id}`;
+
   return (
     <Link
-      to={`/proyecto/${id}`}
+      to={linkTo}
       className={`group relative block overflow-hidden rounded-xl h-full min-h-0 ${size}`}
     >
       <img
         src={img}
         alt={titulo}
         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        loading="lazy"
       />
       {/* Título centrado en la mitad de la imagen */}
       {categoriaTitulo && (

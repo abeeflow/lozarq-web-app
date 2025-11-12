@@ -22,10 +22,11 @@ export default function AdminProjectsCreate() {
     ubicacion: '',
     fecha: '',
     descripcion: '',
-    categoria: '' as 'interiores-vivienda' | 'infantil' | 'comercio' | '',
+    categoria: 'Residencial' as 'Residencial' | 'Infantil' | 'Comercial' | 'Corporativo',
   });
 
   const [files, setFiles] = useState<FilePreview[]>([]);
+  const [selectedCoverIndex, setSelectedCoverIndex] = useState<number | null>(null);
   const [uploadProgress, setUploadProgress] = useState<string>('');
 
   const handleInputChange = (
@@ -79,23 +80,33 @@ export default function AdminProjectsCreate() {
         'projects'
       );
 
+      const galleryUrls = uploadResults.map((r) => r.url);
+
+      // Determine cover image: use selected or first image
+      const coverImage = selectedCoverIndex !== null
+        ? galleryUrls[selectedCoverIndex]
+        : galleryUrls[0] || '';
+
       // Create project in database
       setUploadProgress('Creating project...');
-      await projectService.create({
+      const projectData = {
         titulo: formData.titulo,
-        img: formData.img,
-        ubicacion: formData.ubicacion,
-        fecha: formData.fecha,
+        img: coverImage,
+        ubicacion: formData.ubicacion || undefined,
+        fecha: formData.fecha || undefined,
         descripcion: formData.descripcion,
-        galeria: uploadResults.map((r) => r.url),
-        categoria: formData.categoria || undefined,
-      });
+        galeria: galleryUrls,
+        categoria: formData.categoria,
+      };
+      console.log('Creating project with data:', projectData);
+      await projectService.create(projectData);
 
       // Cleanup previews
       files.forEach((f) => URL.revokeObjectURL(f.preview));
 
       navigate('/admin/projects');
     } catch (err) {
+      console.error('Error creating project:', err);
       setError(err instanceof Error ? err.message : 'Failed to create project');
     } finally {
       setLoading(false);
@@ -144,20 +155,6 @@ export default function AdminProjectsCreate() {
               />
             </div>
 
-            <div>
-              <label htmlFor="img" className="block text-sm font-medium text-gray-700 mb-2">
-                Imagen principal (URL)
-              </label>
-              <input
-                type="text"
-                id="img"
-                name="img"
-                value={formData.img}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="URL de la imagen principal"
-              />
-            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -201,10 +198,10 @@ export default function AdminProjectsCreate() {
                 onChange={handleInputChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
-                <option value="">Sin categoría</option>
-                <option value="interiores-vivienda">Interiores de vivienda</option>
-                <option value="infantil">Infantil</option>
-                <option value="comercio">Comercio</option>
+                <option value="Residencial">Residencial</option>
+                <option value="Infantil">Infantil</option>
+                <option value="Comercial">Comercial</option>
+                <option value="Corporativo">Corporativo</option>
               </select>
             </div>
 
@@ -264,44 +261,80 @@ export default function AdminProjectsCreate() {
 
             {/* File Previews */}
             {files.length > 0 && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {files.map((filePreview, index) => (
-                  <div key={index} className="relative group">
-                    <div className="aspect-square rounded-lg overflow-hidden bg-gray-100">
-                      {filePreview.type === 'image' ? (
-                        <img
-                          src={filePreview.preview}
-                          alt=""
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <video
-                          src={filePreview.preview}
-                          className="w-full h-full object-cover"
-                          muted
-                        />
-                      )}
+              <>
+                <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                  <p className="text-sm text-blue-800">
+                    <strong>Portada:</strong> {selectedCoverIndex !== null
+                      ? `Imagen ${selectedCoverIndex + 1}`
+                      : 'Primera imagen (por defecto)'}
+                  </p>
+                  <p className="text-xs text-blue-600 mt-1">
+                    Haz clic en una imagen para seleccionarla como portada
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                  {files.map((filePreview, index) => (
+                    <div key={index} className="relative group">
+                      <div
+                        className={`aspect-square rounded-lg overflow-hidden bg-gray-100 cursor-pointer border-4 transition-all ${
+                          selectedCoverIndex === index
+                            ? 'border-blue-500 shadow-lg'
+                            : 'border-transparent hover:border-blue-300'
+                        }`}
+                        onClick={() => setSelectedCoverIndex(index)}
+                      >
+                        {filePreview.type === 'image' ? (
+                          <img
+                            src={filePreview.preview}
+                            alt=""
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <video
+                            src={filePreview.preview}
+                            className="w-full h-full object-cover"
+                            muted
+                          />
+                        )}
+                        {selectedCoverIndex === index && (
+                          <div className="absolute inset-0 bg-blue-500/20 flex items-center justify-center">
+                            <div className="bg-blue-500 text-white rounded-full p-2">
+                              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                              </svg>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          removeFile(index);
+                          if (selectedCoverIndex === index) {
+                            setSelectedCoverIndex(null);
+                          } else if (selectedCoverIndex !== null && selectedCoverIndex > index) {
+                            setSelectedCoverIndex(selectedCoverIndex - 1);
+                          }
+                        }}
+                        className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity z-10"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                      <div className="mt-1 text-xs text-gray-500 truncate">
+                        {filePreview.file.name}
+                      </div>
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => removeFile(index)}
-                      className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </button>
-                    <div className="mt-1 text-xs text-gray-500 truncate">
-                      {filePreview.file.name}
-                    </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              </>
             )}
           </div>
 

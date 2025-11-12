@@ -1,73 +1,113 @@
-# React + TypeScript + Vite
+# Lozarq Estudio - Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web para Lozarq Estudio de Arquitectura e Interiorismo.
 
-Currently, two official plugins are available:
+## Tecnologías
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 19** con TypeScript
+- **Vite** como build tool
+- **Tailwind CSS** para estilos
+- **React Router** para navegación
+- **Supabase** para backend (base de datos y storage)
+- **Google Calendar** para sistema de citas
 
-## React Compiler
+## Requisitos Previos
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Node.js 18+
+- npm o yarn
+- Cuenta de Supabase
+- Cuenta de Google Calendar
 
-## Expanding the ESLint configuration
+## Instalación Local
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Clonar el repositorio:
+```bash
+git clone <repository-url>
+cd lozarq-web-app
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Instalar dependencias:
+```bash
+npm install
 ```
+
+3. Configurar variables de entorno:
+   - Copiar `.env.example` a `.env`
+   - Completar con tus credenciales de Supabase y Google Calendar
+
+4. Ejecutar en modo desarrollo:
+```bash
+npm run dev
+```
+
+## Deployment en Vercel
+
+### Paso 1: Preparar el repositorio
+
+Asegúrate de que tu código esté en un repositorio Git (GitHub, GitLab, o Bitbucket).
+
+### Paso 2: Importar proyecto en Vercel
+
+1. Ve a [vercel.com](https://vercel.com) e inicia sesión
+2. Click en "Add New Project"
+3. Importa tu repositorio de Git
+4. Vercel detectará automáticamente que es un proyecto Vite
+
+### Paso 3: Configurar variables de entorno
+
+En la sección "Environment Variables" de Vercel, añade:
+
+```
+VITE_SUPABASE_URL=tu_url_de_supabase
+VITE_SUPABASE_ANON_KEY=tu_clave_anon_de_supabase
+VITE_CALENDLY_URL=tu_url_de_google_calendar
+```
+
+### Paso 4: Deploy
+
+1. Click en "Deploy"
+2. Vercel construirá y desplegará automáticamente tu aplicación
+3. Recibirás una URL de producción cuando termine
+
+### Configuración Automática
+
+El proyecto ya incluye:
+- ✅ `vercel.json` - Configuración de rewrites para SPA
+- ✅ `package.json` - Scripts de build correctos
+- ✅ `.gitignore` - Archivos excluidos del repositorio
+- ✅ `.env.example` - Plantilla de variables de entorno
+
+## Scripts Disponibles
+
+```bash
+npm run dev      # Servidor de desarrollo
+npm run build    # Build de producción
+npm run preview  # Preview del build
+npm run lint     # Ejecutar ESLint
+```
+
+## Estructura del Proyecto
+
+```
+src/
+├── components/     # Componentes reutilizables
+├── pages/         # Páginas de la aplicación
+├── hooks/         # Custom React hooks
+├── services/      # Servicios (Supabase, etc.)
+├── types/         # Definiciones de TypeScript
+└── App.tsx        # Componente principal
+```
+
+## Características
+
+- ✨ Responsive design (móvil, tablet, desktop)
+- 🎨 Dark mode support
+- 🖼️ Galería de proyectos con categorías
+- 📅 Sistema de reserva de citas con Google Calendar
+- 🔐 Panel de administración para gestión de proyectos
+- 📱 Optimización de carga con lazy loading
+- 🚀 Deploy automático con Vercel
+
+## Soporte
+
+Para problemas o consultas, contactar al equipo de desarrollo.

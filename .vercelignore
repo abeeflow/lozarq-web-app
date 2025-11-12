@@ -1,0 +1,11 @@
+# Archivos a ignorar en el deployment de Vercel
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+*.log
+.vscode
+.idea
+README.md
+DEPLOYMENT.md

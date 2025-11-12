@@ -6,7 +6,7 @@ export interface Project {
   fecha?: string;
   descripcion: string;
   galeria: string[];
-  categoria?: 'interiores-vivienda' | 'infantil' | 'comercio';
+  categoria?: 'Residencial' | 'Infantil' | 'Comercial' | 'Corporativo';
   created_at: string;
   updated_at: string;
 }
@@ -18,7 +18,7 @@ export interface CreateProjectData {
   fecha?: string;
   descripcion: string;
   galeria: string[];
-  categoria?: 'interiores-vivienda' | 'infantil' | 'comercio';
+  categoria?: 'Residencial' | 'Infantil' | 'Comercial' | 'Corporativo';
 }
 
 export interface UpdateProjectData {
@@ -28,5 +28,5 @@ export interface UpdateProjectData {
   fecha?: string;
   descripcion?: string;
   galeria?: string[];
-  categoria?: 'interiores-vivienda' | 'infantil' | 'comercio';
+  categoria?: 'Residencial' | 'Infantil' | 'Comercial' | 'Corporativo';
 }

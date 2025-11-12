@@ -149,7 +149,10 @@ export default function AdminProjectsIndex() {
                             key={idx}
                             src={url}
                             alt=""
-                            className="h-8 w-8 rounded-full border-2 border-white object-cover"
+                            className="h-8 w-8 rounded-full border-2 border-white object-cover bg-gray-100"
+                            onError={(e) => {
+                              e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"%3E%3Crect width="32" height="32" fill="%23e5e7eb"/%3E%3Ctext x="16" y="16" text-anchor="middle" dominant-baseline="middle" fill="%239ca3af" font-size="12"%3E?%3C/text%3E%3C/svg%3E';
+                            }}
                           />
                         ))}
                         {project.galeria.length > 3 && (

@@ -3,7 +3,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import HomePage from './pages/HomePage';
 import ProyectosPage from './pages/ProyectosPage';
-import ProyectoDetallePage from './pages/ProyectoDetallePage';
+import ProyectoDetailPage from './pages/ProyectoDetailPage';
 import ImagenDetallePage from './pages/ImagenDetallePage';
 import ServiciosPage from './pages/ServiciosPage';
 import EstudioPage from './pages/EstudioPage';
@@ -30,7 +30,7 @@ function App() {
           {/* Public Routes */}
           <Route path="/" element={<PublicLayout><HomePage /></PublicLayout>} />
           <Route path="/proyectos" element={<PublicLayout><ProyectosPage /></PublicLayout>} />
-          <Route path="/proyecto/:id" element={<PublicLayout><ProyectoDetallePage /></PublicLayout>} />
+          <Route path="/proyectos/:id" element={<PublicLayout><ProyectoDetailPage /></PublicLayout>} />
           <Route path="/proyecto/:id/imagen/:imageIndex" element={<PublicLayout><ImagenDetallePage /></PublicLayout>} />
           <Route path="/servicios" element={<PublicLayout><ServiciosPage /></PublicLayout>} />
           <Route path="/estudio" element={<PublicLayout><EstudioPage /></PublicLayout>} />

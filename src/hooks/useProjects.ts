@@ -12,7 +12,12 @@ export const useProjects = () => {
       setLoading(true);
       setError(null);
       const data = await projectService.getAll();
-      setProjects(data);
+      // Normalize empty img strings to use first gallery image
+      const normalizedData = data.map(project => ({
+        ...project,
+        img: project.img && project.img.trim() !== '' ? project.img : project.galeria[0] || ''
+      }));
+      setProjects(normalizedData);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch projects');
     } finally {
@@ -37,7 +42,16 @@ export const useProject = (id: number) => {
       setLoading(true);
       setError(null);
       const data = await projectService.getById(id);
-      setProject(data);
+      // Normalize empty img string to use first gallery image
+      if (data) {
+        const normalizedProject = {
+          ...data,
+          img: data.img && data.img.trim() !== '' ? data.img : data.galeria[0] || ''
+        };
+        setProject(normalizedProject);
+      } else {
+        setProject(data);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch project');
     } finally {
