@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { usePageSEO } from '../hooks/usePageSEO';
 
 const servicios = [
   { icono: 'holiday_village', titulo: 'Diseño Interior', desc: 'Transformación de espacios para elevar estética, funcionalidad y confort, creando ambientes que reflejan personalidad y estilo.' },
@@ -13,6 +14,14 @@ const servicios = [
 export default function ServiciosPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalPages = servicios.length;
+
+  usePageSEO({
+    title: 'Servicios | Lozarq Estudio - Diseño Interior y Arquitectura',
+    description: 'Ofrecemos diseño interior, consultoría de diseño, mobiliario a medida y servicios de arquitectura y construcción en Lima, Perú.',
+    keywords: 'diseño interior, consultoría diseño, mobiliario a medida, arquitectura, construcción, Lima',
+    ogImage: 'https://www.lozarqestudio.com/diseño.jpg',
+    canonical: 'https://www.lozarqestudio.com/servicios'
+  });
 
   const nextSlide = () => {
     if (currentIndex < totalPages - 1) {

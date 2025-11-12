@@ -11,7 +11,8 @@
       "Bash(nul)",
       "Bash(exit 0)",
       "Bash(if exist \"node_modules\\.vite\" rmdir /S /Q \"node_modules\\.vite\")",
-      "Bash(if exist \"dist\" rmdir /S /Q \"dist\")"
+      "Bash(if exist \"dist\" rmdir /S /Q \"dist\")",
+      "Bash(npm run preview:*)"
     ],
     "deny": [],
     "ask": []
