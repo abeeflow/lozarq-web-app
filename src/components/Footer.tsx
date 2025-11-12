@@ -1,8 +1,8 @@
 export default function Footer() {
   return (
-    <footer className="mt-auto border-t border-gray-200 dark:border-gray-800 bg-background-light dark:bg-background-dark h-12">
-      <div className="mx-auto max-w-2xl px-4 h-full flex items-center justify-center">
-        <p className="text-center text-[10px] sm:text-xs text-text-light/50 dark:text-text-dark/60">
+    <footer className="relative z-40 mt-auto border-t border-gray-300 dark:border-gray-700 bg-background-light dark:bg-background-dark h-14">
+      <div className="mx-auto max-w-7xl px-6 h-full flex items-center justify-center">
+        <p className="text-center text-[10px] sm:text-[11px] text-text-light/70 dark:text-text-dark/70">
           © 2025 Lozarq Estudio. Todos los derechos reservados.
         </p>
       </div>
