@@ -6,13 +6,13 @@ const teamImg = '/foto_portadada_v2.jpg';
 
 export default function EstudioPage() {
   return (
-    <div className="relative grid h-screen w-full grid-rows-[auto,1fr,auto] bg-background-light dark:bg-background-dark">
+    <div className="relative grid min-h-screen w-full grid-rows-[auto,1fr,auto] bg-background-light dark:bg-background-dark">
       <Header />
       <div className="min-h-0 px-[clamp(12px,3.2vw,48px)]">
         <div className="mx-auto max-w-7xl">
-          <main className="mt-[clamp(6px,1.4vw,12px)] h-full min-h-0">
+          <main className="mt-[clamp(6px,1.4vw,12px)] pb-[clamp(10px,2.4vw,20px)] h-full min-h-0">
             <div className="grid grid-cols-1 md:grid-cols-2 h-full gap-[clamp(8px,2vw,20px)] items-stretch">
-              <section className="space-y-6 self-center">
+              <section className="space-y-6 self-start md:self-center">
               <div className="space-y-[clamp(6px,1.2vw,12px)] max-w-2xl leading-[1.45] text-text-light dark:text-text-dark text-justify text-[clamp(0.94rem,1.22vw,1.08rem)]">
                 <p>
                   Lozarq Estudio es un estudio de arquitectura e interiorismo ubicado en Trujillo, 
@@ -41,7 +41,15 @@ export default function EstudioPage() {
                   </a>
                 </p>
                 <p>
-                  <a href="tel:+51963103387" className="underline hover:opacity-80">+51 963 103 387</a>
+                  <a
+                    href="https://wa.me/51963103387?text=Hola%20Lozarq%20Estudio,%20quisiera%20m%C3%A1s%20informaci%C3%B3n."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Abrir chat de WhatsApp"
+                    className="underline hover:opacity-80"
+                  >
+                    +51 963 103 387
+                  </a>
                 </p>
               </address>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -75,7 +83,7 @@ export default function EstudioPage() {
               </div>
             </section>
             <aside className="mt-[clamp(6px,1.2vw,10px)] md:mt-0 md:self-stretch">
-              <figure className="w-full h-[clamp(30vh,36vw,48vh)] md:h-full min-h-0 mx-auto overflow-hidden rounded-3xl" style={{maxHeight: 'calc(100vh - 220px)'}}>
+              <figure className="w-full h-[60vh] md:h-full min-h-0 mx-auto overflow-hidden rounded-3xl">
                 <img
                   src={teamImg}
                   alt="Equipo Lozarq Estudio"
