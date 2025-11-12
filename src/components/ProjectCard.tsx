@@ -3,29 +3,32 @@ import { Link } from 'react-router-dom';
 interface ProjectCardProps {
   id: number;
   titulo: string;
+  categoriaTitulo?: string;
   img: string;
   size?: string;
 }
 
-export default function ProjectCard({ id, titulo, img, size = '' }: ProjectCardProps) {
+export default function ProjectCard({ id, titulo, categoriaTitulo, img, size = '' }: ProjectCardProps) {
   return (
     <Link
       to={`/proyecto/${id}`}
-      className={`group relative block overflow-hidden rounded-xl ${size}`}
+      className={`group relative block overflow-hidden rounded-xl h-full min-h-0 ${size}`}
     >
       <img
         src={img}
         alt={titulo}
         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
       />
-      <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity" />
-      <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity">
-        <h3 className="text-white text-2xl font-bold">{titulo}</h3>
-        <div className="flex items-center gap-2 mt-2 text-white text-sm">
-          <span>Ver Proyecto</span>
-          <span className="material-symbols-outlined">arrow_forward</span>
+      {/* Título centrado en la mitad de la imagen */}
+      {categoriaTitulo && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-full bg-white/60 backdrop-blur-sm py-3 md:py-4 rounded-sm group-hover:bg-white/75 transition-all flex items-center justify-center">
+            <h2 className="text-gray-900/70 text-2xl md:text-3xl lg:text-4xl font-medium tracking-wide uppercase text-center group-hover:text-gray-900/90 transition-all">
+              {categoriaTitulo}
+            </h2>
+          </div>
         </div>
-      </div>
+      )}
     </Link>
   );
 }
