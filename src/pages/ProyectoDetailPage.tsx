@@ -146,10 +146,10 @@ export default function ProyectoDetailPage() {
 
             {/* Description */}
             <div className="mb-12">
-              <h3 className="text-xl font-light text-text-light dark:text-text-dark mb-4">
+              <h3 className="text-sm font-light uppercase text-text-light dark:text-text-dark mb-4">
                 Descripción
               </h3>
-              <p className="text-lg text-gray-700 dark:text-gray-300 whitespace-pre-line">
+              <p className="text-base text-gray-700 dark:text-gray-300 whitespace-pre-line">
                 {project.descripcion}
               </p>
             </div>
@@ -157,7 +157,7 @@ export default function ProyectoDetailPage() {
             {/* Gallery */}
             {project.galeria.length > 0 && (
               <div>
-                <h3 className="text-xl font-light text-text-light dark:text-text-dark mb-6">
+                <h3 className="text-sm font-light uppercase text-text-light dark:text-text-dark mb-6">
                   Galería
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
