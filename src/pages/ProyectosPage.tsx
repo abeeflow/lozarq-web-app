@@ -45,7 +45,7 @@ export default function ProyectosPage() {
             {!showCategories && (
               <h1
                 className={`${categoria && categoria.toLowerCase() === 'infantil'
-                  ? 'text-base font-light text-primary uppercase'
+                  ? 'text-[1.1rem] font-light text-primary uppercase'
                   : 'text-4xl md:text-5xl font-black text-text-light dark:text-text-dark'
                 } mb-8`}
               >
