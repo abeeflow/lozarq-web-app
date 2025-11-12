@@ -43,7 +43,12 @@ export default function ProyectosPage() {
         <div className="max-w-[1280px] mx-auto h-full min-h-0">
           <main className="h-full flex flex-col">
             {!showCategories && (
-              <h1 className="text-sm font-black text-text-light dark:text-text-dark mb-8">
+              <h1
+                className={`${categoria && categoria.toLowerCase() === 'infantil'
+                  ? 'text-base font-light text-primary uppercase'
+                  : 'text-4xl md:text-5xl font-black text-text-light dark:text-text-dark'
+                } mb-8`}
+              >
                 {categoria && categoria.toLowerCase() === 'infantil' ? categoria.toUpperCase() : categoria}
               </h1>
             )}
