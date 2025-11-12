@@ -149,7 +149,7 @@ export default function ProyectoDetailPage() {
               <h3 className="text-xl font-light text-text-light dark:text-text-dark mb-4">
                 Descripción
               </h3>
-              <p className="text-lg text-gray-700 dark:text-gray-300 whitespace-pre-line">
+              <p className="text-base text-gray-700 dark:text-gray-300 whitespace-pre-line">
                 {project.descripcion}
               </p>
             </div>
