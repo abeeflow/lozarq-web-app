@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ProjectCard from '../components/ProjectCard';
 import { useProjects } from '../hooks/useProjects';
+import { usePageSEO } from '../hooks/usePageSEO';
 
 const CATEGORIAS = [
   { nombre: 'Residencial', imagen: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800' },
@@ -22,6 +23,19 @@ export default function ProyectosPage() {
 
   // Si NO hay categoría en la URL, mostrar las 4 categorías
   const showCategories = !categoria;
+
+  // SEO dinámico
+  usePageSEO({
+    title: categoria
+      ? `Proyectos ${categoria} | Lozarq Estudio`
+      : 'Proyectos | Lozarq Estudio - Arquitectura e Interiorismo',
+    description: categoria
+      ? `Descubre nuestros proyectos de ${categoria}. Diseño arquitectónico e interiorismo de alta calidad en Lima, Perú.`
+      : 'Explora nuestro portafolio de proyectos de arquitectura e interiorismo. Residencial, infantil, comercial y corporativo.',
+    keywords: `proyectos arquitectura, ${categoria || 'diseño'}, interiorismo Lima, Lozarq`,
+    ogImage: 'https://www.lozarqestudio.com/foto_main.jpg',
+    canonical: `https://www.lozarqestudio.com/proyectos${categoria ? '?categoria=' + categoria : ''}`
+  });
   return (
     <div className="relative grid h-screen w-full grid-rows-[auto,1fr,auto] bg-background-light dark:bg-background-dark">
       <Header />

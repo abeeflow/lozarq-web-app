@@ -24,8 +24,10 @@ export default function Header() {
           >
             <img
               src="/Lozarq_Logotipo2.png"
-              alt="Lozarq Logo"
+              alt="Lozarq Estudio - Arquitectura e Interiorismo"
               className="h-16 w-auto"
+              loading="eager"
+              fetchPriority="high"
             />
           </Link>
 

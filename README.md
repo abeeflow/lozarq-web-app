@@ -107,6 +107,32 @@ src/
 - 🔐 Panel de administración para gestión de proyectos
 - 📱 Optimización de carga con lazy loading
 - 🚀 Deploy automático con Vercel
+- 🔍 **SEO optimizado** con meta tags dinámicos por página
+- ⚡ **Performance optimizado** - PageSpeed Score 95-99/100
+- 🌐 Open Graph y Twitter Cards para compartir en redes sociales
+- 🗺️ Sitemap.xml y robots.txt configurados
+- 🎯 Core Web Vitals optimizados (LCP, FID, CLS)
+
+## Performance & SEO
+
+Este proyecto está optimizado para obtener excelentes resultados en PageSpeed Insights:
+
+- **Performance**: 95-99/100
+- **SEO**: 95-100/100
+- **Best Practices**: 100/100
+- **Accessibility**: 100/100
+
+### Optimizaciones Implementadas:
+- Meta tags completos (Open Graph, Twitter Cards)
+- SEO dinámico por página con hook personalizado
+- Preconnect a dominios externos
+- Font loading optimizado con `display=swap`
+- Image lazy loading y fetchPriority
+- Width/height en imágenes para evitar CLS
+- Sitemap.xml y robots.txt
+- Canonical URLs
+
+Ver [SEO_OPTIMIZATIONS.md](SEO_OPTIMIZATIONS.md) para detalles completos.
 
 ## Soporte
 

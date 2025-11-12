@@ -2,11 +2,25 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useProject } from '../hooks/useProjects';
+import { usePageSEO } from '../hooks/usePageSEO';
 
 export default function ProyectoDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { project, loading, error } = useProject(Number(id));
+
+  // SEO dinámico basado en el proyecto
+  usePageSEO({
+    title: project ? `${project.titulo} | Lozarq Estudio` : 'Proyecto | Lozarq Estudio',
+    description: project
+      ? `${project.descripcion?.substring(0, 150) || `Proyecto ${project.categoria} en ${project.ubicacion || 'Lima'}`}...`
+      : 'Descubre nuestros proyectos de arquitectura e interiorismo',
+    keywords: project
+      ? `${project.titulo}, ${project.categoria}, proyecto arquitectura, ${project.ubicacion || 'Lima'}`
+      : 'proyectos arquitectura, diseño',
+    ogImage: project?.img || 'https://www.lozarqestudio.com/foto_main.jpg',
+    canonical: `https://www.lozarqestudio.com/proyecto/${id}`
+  });
 
   const handleBack = () => {
     navigate(-1);
@@ -92,9 +106,12 @@ export default function ProyectoDetailPage() {
               <div className="mb-8 rounded-lg overflow-hidden shadow-xl">
                 <img
                   src={project.img || project.galeria[0]}
-                  alt={project.titulo}
+                  alt={`${project.titulo} - Proyecto ${project.categoria}`}
                   className="w-full max-h-[600px] object-cover"
                   loading="eager"
+                  fetchPriority="high"
+                  width="1200"
+                  height="600"
                 />
               </div>
             )}
