@@ -14,7 +14,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="absolute top-0 left-0 right-0 z-10 p-6 md:p-8 lg:p-10">
+      <header className="sticky top-0 left-0 right-0 z-50 p-6 md:p-8 lg:p-10 bg-background-light dark:bg-background-dark border-b border-gray-200 dark:border-gray-800">
         <div className="mx-auto flex max-w-7xl items-center justify-between">
 
           {/* Logo */}
@@ -110,12 +110,12 @@ export default function Header() {
         <>
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
+            className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
             onClick={closeMobileMenu}
           />
 
           {/* Mobile Menu */}
-          <div className="fixed top-0 right-0 bottom-0 w-64 bg-background-light dark:bg-background-dark z-30 md:hidden shadow-xl transform transition-transform duration-300 ease-in-out">
+          <div className="fixed top-0 right-0 bottom-0 w-64 bg-background-light dark:bg-background-dark z-50 md:hidden shadow-xl transform transition-transform duration-300 ease-in-out">
             <div className="flex flex-col h-full p-6">
               {/* Close Button */}
               <div className="flex justify-end mb-8">

@@ -23,15 +23,11 @@ export default function ProyectosPage() {
   // Si NO hay categoría en la URL, mostrar las 4 categorías
   const showCategories = !categoria;
   return (
-    <div className="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark">
-      <div className="flex-1 flex flex-col px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 py-5">
-        <div className="max-w-[1280px] mx-auto flex-1 flex flex-col">
-          <Header />
-          <br />
-          <br />
-          <br />
-          <br />
-          <main className="mt-12 flex-1 flex flex-col">
+    <div className="relative grid h-screen w-full grid-rows-[auto,1fr,auto] bg-background-light dark:bg-background-dark">
+      <Header />
+      <div className="min-h-0 h-full px-[clamp(12px,3.2vw,48px)] py-[clamp(12px,2.4vw,24px)] overflow-y-auto">
+        <div className="max-w-[1280px] mx-auto h-full min-h-0">
+          <main className="h-full flex flex-col">
             {!showCategories && (
               <h1 className="text-4xl md:text-5xl font-black text-text-light dark:text-text-dark mb-8">
                 {categoria}
@@ -40,18 +36,21 @@ export default function ProyectosPage() {
 
             {/* Mostrar categorías cuando NO hay filtro */}
             {showCategories && (
-              <div className="flex-1 grid grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-                {CATEGORIAS.map((cat, index) => (
-                  <div key={cat.nombre} className="min-h-0">
-                    <ProjectCard
-                      id={index}
-                      titulo={cat.nombre}
-                      categoriaTitulo={cat.nombre}
-                      img={cat.imagen}
-                      customLink={`/proyectos?categoria=${cat.nombre}`}
-                    />
-                  </div>
-                ))}
+              <div className="flex-1 grid place-items-center">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(12px,2.4vw,20px)] place-items-center justify-center">
+                  {CATEGORIAS.map((cat, index) => (
+                    <div key={cat.nombre} className="min-h-0 w-full">
+                      <ProjectCard
+                        id={index}
+                        titulo={cat.nombre}
+                        categoriaTitulo={cat.nombre}
+                        img={cat.imagen}
+                        size="aspect-square md:aspect-[2/3] w-full"
+                        customLink={`/proyectos?categoria=${cat.nombre}`}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 
@@ -90,13 +89,13 @@ export default function ProyectosPage() {
                 )}
 
                 {!loading && !error && proyectosFiltrados.length > 0 && (
-                  <div className="flex-1 flex flex-col min-h-0">
-                    <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-6 overflow-y-auto pb-8">
-                      {proyectosFiltrados.map((proyecto) => (
+                  <div className="flex-1 grid place-items-center">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(12px,2.4vw,20px)] place-items-center justify-center">
+                      {proyectosFiltrados.slice(0,4).map((proyecto) => (
                         <Link
                           key={proyecto.id}
                           to={`/proyectos/${proyecto.id}`}
-                          className="group relative block overflow-hidden rounded-2xl aspect-[4/3] hover:shadow-2xl transition-all duration-300"
+                          className="group relative block overflow-hidden rounded-2xl aspect-square md:aspect-[2/3] hover:shadow-2xl transition-all duration-300 w-full"
                         >
                           <img
                             src={proyecto.img || proyecto.galeria[0] || ''}
@@ -135,7 +134,6 @@ export default function ProyectosPage() {
           </main>
 
         </div>
-
       </div>
       <Footer />
     </div>

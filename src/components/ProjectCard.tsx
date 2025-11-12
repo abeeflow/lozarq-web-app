@@ -15,7 +15,7 @@ export default function ProjectCard({ id, titulo, categoriaTitulo, img, size = '
   return (
     <Link
       to={linkTo}
-      className={`group relative block overflow-hidden rounded-xl h-full min-h-0 ${size}`}
+      className={`group relative block overflow-hidden rounded-xl w-full min-h-0 ${size}`}
     >
       <img
         src={img}
@@ -26,8 +26,8 @@ export default function ProjectCard({ id, titulo, categoriaTitulo, img, size = '
       {/* Título centrado en la mitad de la imagen */}
       {categoriaTitulo && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-full bg-white/60 backdrop-blur-sm py-3 md:py-4 rounded-sm group-hover:bg-white/75 transition-all flex items-center justify-center">
-            <h2 className="text-gray-900/70 text-2xl md:text-3xl lg:text-4xl font-medium tracking-wide uppercase text-center group-hover:text-gray-900/90 transition-all">
+          <div className="w-full bg-white/60 backdrop-blur-sm py-3 md:py-4 px-4 rounded-sm group-hover:bg-white/75 transition-all flex items-center justify-center">
+            <h2 className="text-gray-900/70 text-[clamp(1rem,2.6vw,2rem)] leading-tight tracking-normal uppercase whitespace-nowrap text-center group-hover:text-gray-900/90 transition-all">
               {categoriaTitulo}
             </h2>
           </div>
