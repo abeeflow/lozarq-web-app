@@ -1,8 +1,17 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { usePageSEO } from '../hooks/usePageSEO';
 
 export default function ContactoPage() {
   const calendarUrl = import.meta.env.VITE_CALENDLY_URL || 'https://calendar.app.google/21RBPrPcN4D63N9f9';
+
+  usePageSEO({
+    title: 'Contacto | Lozarq Estudio - Agenda tu Cita',
+    description: 'Agenda una reunión con nuestro estudio de arquitectura e interiorismo. Transformamos tu idea en realidad. Contáctanos en Lima, Perú.',
+    keywords: 'contacto Lozarq, agendar cita arquitecto, consultoría diseño Lima, reunión arquitectura',
+    ogImage: 'https://www.lozarqestudio.com/foto_main.jpg',
+    canonical: 'https://www.lozarqestudio.com/contacto'
+  });
 
   return (
     <div className="relative grid h-screen w-full grid-rows-[auto,1fr,auto] bg-background-light dark:bg-background-dark overflow-hidden">
