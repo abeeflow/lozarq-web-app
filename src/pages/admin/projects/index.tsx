@@ -139,7 +139,13 @@ export default function AdminProjectsIndex() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-500">
-                        {project.fecha ? new Date(project.fecha).toLocaleDateString() : '-'}
+                        {project.fecha ? (() => {
+                          // Extraer el año directamente del string para evitar problemas de zona horaria
+                          // La fecha puede venir como "2025-01-01" o como ISO string completo
+                          const fechaStr = project.fecha.split('T')[0]; // Obtener solo la parte de fecha (YYYY-MM-DD)
+                          const parts = fechaStr.split('-');
+                          return parts.length >= 1 && parts[0] ? parts[0].trim() : '-';
+                        })() : '-'}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">

@@ -16,11 +16,13 @@ export default function AdminProjectsCreate() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const currentYear = new Date().getFullYear();
+
   const [formData, setFormData] = useState({
     titulo: '',
     img: '',
     ubicacion: '',
-    fecha: '',
+    fecha: currentYear.toString(),
     descripcion: '',
     categoria: 'Residencial' as 'Residencial' | 'Infantil' | 'Comercial' | 'Corporativo',
   });
@@ -34,6 +36,13 @@ export default function AdminProjectsCreate() {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleYearChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const year = e.target.value;
+    if (year) {
+      setFormData((prev) => ({ ...prev, fecha: year }));
+    }
   };
 
   const handleFileSelect = (e: ChangeEvent<HTMLInputElement>) => {
@@ -89,11 +98,20 @@ export default function AdminProjectsCreate() {
 
       // Create project in database
       setUploadProgress('Creating project...');
+      
+      // Convertir año a fecha completa (01/01/YYYY) y luego a ISO string (YYYY-MM-DD)
+      let fechaString: string | undefined = undefined;
+      if (formData.fecha) {
+        const year = formData.fecha.trim();
+        // Crear fecha como 01/01/YYYY y convertir a ISO string (YYYY-MM-DD)
+        fechaString = `${year}-01-01`;
+      }
+      
       const projectData = {
         titulo: formData.titulo,
         img: coverImage,
         ubicacion: formData.ubicacion || undefined,
-        fecha: formData.fecha || undefined,
+        fecha: fechaString || undefined,
         descripcion: formData.descripcion,
         galeria: galleryUrls,
         categoria: formData.categoria,
@@ -176,14 +194,37 @@ export default function AdminProjectsCreate() {
                 <label htmlFor="fecha" className="block text-sm font-medium text-gray-700 mb-2">
                   Fecha
                 </label>
-                <input
-                  type="date"
-                  id="fecha"
-                  name="fecha"
-                  value={formData.fecha}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
+                <div className="relative">
+                  <input
+                    type="text"
+                    readOnly
+                    value={formData.fecha || currentYear.toString()}
+                    className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white pointer-events-none"
+                    placeholder="YYYY"
+                  />
+                  <select
+                    id="fecha-year"
+                    name="fecha-year"
+                    value={formData.fecha || currentYear.toString()}
+                    onChange={handleYearChange}
+                    className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                    style={{ zIndex: 10 }}
+                  >
+                    {Array.from({ length: 11 }, (_, i) => {
+                      const year = currentYear - i;
+                      return (
+                        <option key={year} value={year.toString()}>
+                          {year}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none" style={{ zIndex: 0 }}>
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                </div>
               </div>
             </div>
 
