@@ -134,11 +134,7 @@ export default function ProyectoDetailPage() {
                     Fecha
                   </h3>
                   <p className="text-base text-text-light dark:text-text-dark">
-                    {new Date(project.fecha).toLocaleDateString('es-ES', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
+                    {new Date(project.fecha).getFullYear()}
                   </p>
                 </div>
               )}

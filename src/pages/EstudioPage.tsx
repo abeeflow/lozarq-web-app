@@ -2,18 +2,18 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { FaInstagram, FaFacebook, FaTiktok } from "react-icons/fa";
 
-const teamImg = '/foto_portadada_v2.jpg';
+const teamImg = '/Lozarq.JPG';
 
 export default function EstudioPage() {
   return (
-    <div className="relative grid min-h-screen w-full grid-rows-[auto,1fr,auto] bg-background-light dark:bg-background-dark">
+    <div className="relative grid h-screen w-full grid-rows-[auto,1fr,auto] bg-background-light dark:bg-background-dark overflow-hidden">
       <Header />
-      <div className="min-h-0 px-[clamp(12px,3.2vw,48px)]">
-        <div className="mx-auto max-w-7xl">
-          <main className="mt-[clamp(6px,1.4vw,12px)] pb-[clamp(10px,2.4vw,20px)] h-full min-h-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 h-full gap-[clamp(8px,2vw,20px)] items-stretch">
-              <section className="space-y-6 self-start md:self-center">
-              <div className="space-y-[clamp(6px,1.2vw,12px)] max-w-2xl leading-[1.45] text-text-light dark:text-text-dark text-justify text-[clamp(0.94rem,1.22vw,1.08rem)]">
+      <div className="min-h-0 px-3 sm:px-4 md:px-6 lg:px-[clamp(12px,3.2vw,48px)] py-1 sm:py-2">
+        <div className="mx-auto max-w-7xl h-full">
+          <main className="h-full min-h-0 flex flex-col">
+            <div className="grid grid-cols-1 md:grid-cols-2 flex-1 min-h-0 gap-2 sm:gap-3 md:gap-4 lg:gap-[clamp(8px,2vw,20px)] items-center">
+              <section className="space-y-2 sm:space-y-2.5 md:space-y-3 flex flex-col justify-center h-full min-h-0 overflow-hidden">
+              <div className="space-y-1.5 sm:space-y-2 md:space-y-2.5 max-w-2xl leading-tight sm:leading-snug md:leading-[1.4] text-text-light dark:text-text-dark text-justify text-xs sm:text-sm md:text-[clamp(0.85rem,1.1vw,1rem)]">
                 <p>
                   Lozarq Estudio es un estudio de arquitectura e interiorismo ubicado en Trujillo, 
                   especializado en diseñar y transformar espacios residenciales, comerciales y corporativos. 
@@ -30,9 +30,9 @@ export default function EstudioPage() {
                 </p>
                 
               </div>
-              <address className="not-italic space-y-1 text-[clamp(0.8rem,1.1vw,0.9rem)]">
+              <address className="not-italic space-y-0.5 sm:space-y-1 text-[10px] sm:text-xs md:text-[clamp(0.7rem,0.95vw,0.85rem)] flex-shrink-0">
                 <p className="font-semibold">
-                  Trujillo <span className="mx-2">|</span> Lima 
+                  Trujillo <span className="mx-1.5 sm:mx-2">|</span> Lima 
                 </p>
                 
                 <p>
@@ -52,42 +52,43 @@ export default function EstudioPage() {
                   </a>
                 </p>
               </address>
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+              <div className="flex flex-wrap items-center gap-x-2 sm:gap-x-3 gap-y-1 flex-shrink-0">
                 <a
                   href="https://www.instagram.com/lozarqestudio/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-[clamp(0.8rem,1.1vw,0.9rem)] text-gray-700 hover:text-black transition-colors"
+                  className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs md:text-[clamp(0.7rem,0.95vw,0.85rem)] text-gray-700 hover:text-black transition-colors"
                 >
-                  <FaInstagram className="text-xl" />
+                  <FaInstagram className="text-sm sm:text-base md:text-lg" />
                   <span className="tracking-wide hover:opacity-80 underline">INSTAGRAM</span>
                 </a>
                 <a
                   href="https://www.facebook.com/p/Lozarq-Estudio-100082969437663/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-[clamp(0.8rem,1.1vw,0.9rem)] text-gray-700 hover:text-black transition-colors"
+                  className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs md:text-[clamp(0.7rem,0.95vw,0.85rem)] text-gray-700 hover:text-black transition-colors"
                 >
-                  <FaFacebook className="text-xl" />
+                  <FaFacebook className="text-sm sm:text-base md:text-lg" />
                   <span className="tracking-wide hover:opacity-80 underline">FACEBOOK</span>
                 </a>
                 <a
                   href="https://www.tiktok.com/@lozarq.estudio"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-[clamp(0.8rem,1.1vw,0.9rem)] text-gray-700 hover:text-black transition-colors"
+                  className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs md:text-[clamp(0.7rem,0.95vw,0.85rem)] text-gray-700 hover:text-black transition-colors"
                 >
-                  <FaTiktok className="text-xl" />
+                  <FaTiktok className="text-sm sm:text-base md:text-lg" />
                   <span className="tracking-wide hover:opacity-80 underline">TIK-TOK</span>
                 </a>
               </div>
             </section>
-            <aside className="mt-[clamp(6px,1.2vw,10px)] md:mt-0 md:self-stretch">
-              <figure className="w-full h-[60vh] md:h-full min-h-0 mx-auto overflow-hidden rounded-3xl">
+            <aside className="flex items-center justify-center w-full h-full min-h-0">
+              <figure className="w-full h-full max-h-full mx-auto overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl lg:rounded-3xl shadow-lg">
                 <img
                   src={teamImg}
                   alt="Equipo Lozarq Estudio"
                   className="w-full h-full object-cover object-center"
+                  loading="lazy"
                 />
               </figure>
             </aside>
