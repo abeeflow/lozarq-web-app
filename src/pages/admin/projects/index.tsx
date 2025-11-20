@@ -10,7 +10,7 @@ export default function AdminProjectsIndex() {
   const [deleting, setDeleting] = useState<number | null>(null);
 
   const handleDelete = async (id: number, galeria: string[]) => {
-    if (!confirm('Are you sure you want to delete this project?')) return;
+    if (!confirm('¿Estás seguro de que deseas eliminar este proyecto?')) return;
 
     try {
       setDeleting(id);
@@ -31,7 +31,7 @@ export default function AdminProjectsIndex() {
 
       refetch();
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Failed to delete project');
+      alert(err instanceof Error ? err.message : 'Error al eliminar el proyecto');
     } finally {
       setDeleting(null);
     }
@@ -43,7 +43,7 @@ export default function AdminProjectsIndex() {
         <div className="min-h-screen bg-gray-50 flex items-center justify-center">
           <div className="text-center">
             <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent"></div>
-            <p className="mt-4 text-gray-600">Loading projects...</p>
+            <p className="mt-4 text-gray-600">Cargando proyectos...</p>
           </div>
         </div>
       </AdminLayout>
@@ -55,13 +55,13 @@ export default function AdminProjectsIndex() {
       <AdminLayout>
         <div className="min-h-screen bg-gray-50 flex items-center justify-center">
           <div className="text-center">
-            <div className="text-red-600 text-xl mb-4">Error loading projects</div>
+            <div className="text-red-600 text-xl mb-4">Error al cargar proyectos</div>
             <p className="text-gray-600 mb-4">{error}</p>
             <button
               onClick={() => refetch()}
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
             >
-              Retry
+              Reintentar
             </button>
           </div>
         </div>
@@ -75,28 +75,28 @@ export default function AdminProjectsIndex() {
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Projects Management</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Gestión de Proyectos</h1>
             <p className="mt-2 text-sm text-gray-600">
-              Manage your portfolio projects
+              Gestiona los proyectos de tu portafolio
             </p>
           </div>
           <Link
             to="/admin/projects/create"
             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
-            + New Project
+            + Nuevo Proyecto
           </Link>
         </div>
 
         {/* Projects Table */}
         {projects.length === 0 ? (
           <div className="bg-white rounded-lg shadow p-12 text-center">
-            <p className="text-gray-500 mb-4">No projects found</p>
+            <p className="text-gray-500 mb-4">No se encontraron proyectos</p>
             <Link
               to="/admin/projects/create"
               className="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
             >
-              Create your first project
+              Crea tu primer proyecto
             </Link>
           </div>
         ) : (

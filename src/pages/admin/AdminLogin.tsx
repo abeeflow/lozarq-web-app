@@ -21,7 +21,7 @@ export default function AdminLogin() {
     if (result.success) {
       navigate('/admin/projects');
     } else {
-      setError(result.error || 'Invalid credentials');
+      setError(result.error || 'Credenciales inválidas');
       setLoading(false);
     }
   };
@@ -49,10 +49,10 @@ export default function AdminLogin() {
               </svg>
             </div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-              Admin Access
+              Acceso de Administrador
             </h1>
             <p className="text-gray-600 dark:text-gray-400 text-sm">
-              Sign in to manage your projects
+              Inicia sesión para gestionar tus proyectos
             </p>
           </div>
 
@@ -72,7 +72,7 @@ export default function AdminLogin() {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
-                Email
+                Correo electrónico
               </label>
               <input
                 type="email"
@@ -91,7 +91,7 @@ export default function AdminLogin() {
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
-                Password
+                Contraseña
               </label>
               <input
                 type="password"
@@ -100,7 +100,7 @@ export default function AdminLogin() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors"
-                placeholder="Enter your password"
+                placeholder="Ingresa tu contraseña"
                 disabled={loading}
               />
             </div>
@@ -132,10 +132,10 @@ export default function AdminLogin() {
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                     ></path>
                   </svg>
-                  Signing in...
+                  Iniciando sesión...
                 </span>
               ) : (
-                'Sign In'
+                'Iniciar Sesión'
               )}
             </button>
           </form>
@@ -143,7 +143,7 @@ export default function AdminLogin() {
 
         {/* Footer */}
         <p className="text-center mt-6 text-sm text-gray-600 dark:text-gray-400">
-          Protected area - Authorized access only
+          Área protegida - Solo acceso autorizado
         </p>
       </div>
     </div>

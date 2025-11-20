@@ -93,7 +93,7 @@ export default function AdminProjectsEdit() {
     selectedFiles.forEach((file) => {
       const validation = storageService.validateFile(file);
       if (!validation.valid) {
-        setError(validation.error || 'Invalid file');
+        setError(validation.error || 'Archivo inválido');
         return;
       }
 
@@ -107,7 +107,7 @@ export default function AdminProjectsEdit() {
   };
 
   const removeExistingFile = async (url: string) => {
-    if (!confirm('Remove this file from the gallery?')) return;
+    if (!confirm('¿Eliminar este archivo de la galería?')) return;
 
     try {
       // Extract path from URL
@@ -134,7 +134,7 @@ export default function AdminProjectsEdit() {
         }
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to remove file');
+      setError(err instanceof Error ? err.message : 'Error al eliminar archivo');
     }
   };
 
@@ -157,7 +157,7 @@ export default function AdminProjectsEdit() {
 
       // Upload new files if any
       if (newFiles.length > 0) {
-        setUploadProgress('Uploading new files...');
+        setUploadProgress('Subiendo nuevos archivos...');
         const uploadResults = await storageService.uploadMultiple(
           newFiles.map((f) => f.file),
           'projects'
@@ -171,7 +171,7 @@ export default function AdminProjectsEdit() {
         : galleryUrls[0] || '';
 
       // Update project
-      setUploadProgress('Updating project...');
+      setUploadProgress('Actualizando proyecto...');
       
       // Convertir año a fecha completa (01/01/YYYY) y luego a ISO string (YYYY-MM-DD)
       let fechaString: string | undefined = undefined;
@@ -196,7 +196,7 @@ export default function AdminProjectsEdit() {
 
       navigate('/admin/projects');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to update project');
+      setError(err instanceof Error ? err.message : 'Error al actualizar el proyecto');
     } finally {
       setLoading(false);
       setUploadProgress('');
@@ -209,7 +209,7 @@ export default function AdminProjectsEdit() {
         <div className="min-h-screen bg-gray-50 flex items-center justify-center">
           <div className="text-center">
             <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent"></div>
-            <p className="mt-4 text-gray-600">Loading project...</p>
+            <p className="mt-4 text-gray-600">Cargando proyecto...</p>
           </div>
         </div>
       </AdminLayout>
@@ -221,13 +221,13 @@ export default function AdminProjectsEdit() {
       <AdminLayout>
         <div className="min-h-screen bg-gray-50 flex items-center justify-center">
           <div className="text-center">
-            <div className="text-red-600 text-xl mb-4">Error loading project</div>
-            <p className="text-gray-600 mb-4">{projectError || 'Project not found'}</p>
+            <div className="text-red-600 text-xl mb-4">Error al cargar proyecto</div>
+            <p className="text-gray-600 mb-4">{projectError || 'Proyecto no encontrado'}</p>
             <button
               onClick={() => navigate('/admin/projects')}
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
             >
-              Back to projects
+              Volver a proyectos
             </button>
           </div>
         </div>
@@ -244,9 +244,9 @@ export default function AdminProjectsEdit() {
             onClick={() => navigate('/admin/projects')}
             className="text-sm text-gray-600 hover:text-gray-900 mb-4"
           >
-            ← Back to projects
+            ← Volver a proyectos
           </button>
-          <h1 className="text-3xl font-bold text-gray-900">Edit Project</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Editar Proyecto</h1>
         </div>
 
         {/* Error Message */}
@@ -368,7 +368,7 @@ export default function AdminProjectsEdit() {
           {/* Existing Gallery */}
           {existingGallery.length > 0 && (
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-sm font-medium text-gray-700 mb-4">Current Gallery</h3>
+              <h3 className="text-sm font-medium text-gray-700 mb-4">Galería Actual</h3>
               <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
                 <p className="text-sm text-blue-800">
                   <strong>Portada:</strong> {selectedCoverIndex !== null && selectedCoverIndex < existingGallery.length
@@ -431,7 +431,7 @@ export default function AdminProjectsEdit() {
           {/* Add New Files */}
           <div className="bg-white rounded-lg shadow p-6">
             <label className="block text-sm font-medium text-gray-700 mb-4">
-              Add New Files
+              Agregar Nuevos Archivos
             </label>
 
             <div className="mb-4">
@@ -451,7 +451,7 @@ export default function AdminProjectsEdit() {
                     />
                   </svg>
                   <p className="mb-2 text-sm text-gray-500">
-                    <span className="font-semibold">Click to upload</span> or drag and drop
+                    <span className="font-semibold">Haz clic para subir</span> o arrastra y suelta
                   </p>
                   <p className="text-xs text-gray-500">JPG, PNG, GIF, MP4 (max 5MB each)</p>
                 </div>
@@ -523,14 +523,14 @@ export default function AdminProjectsEdit() {
               className="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
               disabled={loading}
             >
-              Cancel
+              Cancelar
             </button>
             <button
               type="submit"
               disabled={loading}
               className="flex-1 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Updating...' : 'Update Project'}
+              {loading ? 'Actualizando...' : 'Actualizar Proyecto'}
             </button>
           </div>
         </form>

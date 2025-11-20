@@ -303,7 +303,7 @@ export default function AdminBookingsIndex() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 text-lg"
-                                title="Ver en Calendar"
+                                title="Ver en Calendario"
                               >
                                 📅
                               </a>

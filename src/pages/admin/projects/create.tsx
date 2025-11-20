@@ -54,7 +54,7 @@ export default function AdminProjectsCreate() {
     selectedFiles.forEach((file) => {
       const validation = storageService.validateFile(file);
       if (!validation.valid) {
-        setError(validation.error || 'Invalid file');
+        setError(validation.error || 'Archivo inválido');
         return;
       }
 
@@ -83,7 +83,7 @@ export default function AdminProjectsCreate() {
 
     try {
       // Upload files to storage
-      setUploadProgress('Uploading files...');
+      setUploadProgress('Subiendo archivos...');
       const uploadResults = await storageService.uploadMultiple(
         files.map((f) => f.file),
         'projects'
@@ -97,7 +97,7 @@ export default function AdminProjectsCreate() {
         : galleryUrls[0] || '';
 
       // Create project in database
-      setUploadProgress('Creating project...');
+      setUploadProgress('Creando proyecto...');
       
       // Convertir año a fecha completa (01/01/YYYY) y luego a ISO string (YYYY-MM-DD)
       let fechaString: string | undefined = undefined;
@@ -125,7 +125,7 @@ export default function AdminProjectsCreate() {
       navigate('/admin/projects');
     } catch (err) {
       console.error('Error creating project:', err);
-      setError(err instanceof Error ? err.message : 'Failed to create project');
+      setError(err instanceof Error ? err.message : 'Error al crear el proyecto');
     } finally {
       setLoading(false);
       setUploadProgress('');
@@ -141,9 +141,9 @@ export default function AdminProjectsCreate() {
             onClick={() => navigate('/admin/projects')}
             className="text-sm text-gray-600 hover:text-gray-900 mb-4"
           >
-            ← Back to projects
+            ← Volver a proyectos
           </button>
-          <h1 className="text-3xl font-bold text-gray-900">Create New Project</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Crear Nuevo Proyecto</h1>
         </div>
 
         {/* Error Message */}
@@ -266,7 +266,7 @@ export default function AdminProjectsCreate() {
           {/* File Upload */}
           <div className="bg-white rounded-lg shadow p-6">
             <label className="block text-sm font-medium text-gray-700 mb-4">
-              Gallery (Images & Videos)
+              Galería (Imágenes y Videos)
             </label>
 
             <div className="mb-4">
@@ -286,7 +286,7 @@ export default function AdminProjectsCreate() {
                     />
                   </svg>
                   <p className="mb-2 text-sm text-gray-500">
-                    <span className="font-semibold">Click to upload</span> or drag and drop
+                    <span className="font-semibold">Haz clic para subir</span> o arrastra y suelta
                   </p>
                   <p className="text-xs text-gray-500">JPG, PNG, GIF, MP4 (max 5MB each)</p>
                 </div>
@@ -394,14 +394,14 @@ export default function AdminProjectsCreate() {
               className="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
               disabled={loading}
             >
-              Cancel
+              Cancelar
             </button>
             <button
               type="submit"
               disabled={loading || files.length === 0}
               className="flex-1 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Creating...' : 'Create Project'}
+              {loading ? 'Creando...' : 'Crear Proyecto'}
             </button>
           </div>
         </form>
