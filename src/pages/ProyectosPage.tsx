@@ -18,7 +18,7 @@ export default function ProyectosPage() {
   const { projects, loading, error } = useProjects();
 
   const proyectosFiltrados = categoria
-    ? projects.filter(p => p.categoria === categoria)
+    ? projects.filter(p => p.categoria?.toLowerCase() === categoria.toLowerCase())
     : projects;
 
   // Si NO hay categoría en la URL, mostrar las 4 categorías

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import AdminLayout from '../../../components/AdminLayout';
 import { projectService } from '../../../services/supabaseProjectService';
 import { storageService } from '../../../services/supabaseStorageService';
+import type { CreateProjectWithFilesData } from '../../../services/supabaseProjectService';
 
 interface FilePreview {
   file: File;
@@ -82,42 +83,26 @@ export default function AdminProjectsCreate() {
     setLoading(true);
 
     try {
-      // Upload files to storage
-      setUploadProgress('Subiendo archivos...');
-      const uploadResults = await storageService.uploadMultiple(
-        files.map((f) => f.file),
-        'projects'
-      );
-
-      const galleryUrls = uploadResults.map((r) => r.url);
-
-      // Determine cover image: use selected or first image
-      const coverImage = selectedCoverIndex !== null
-        ? galleryUrls[selectedCoverIndex]
-        : galleryUrls[0] || '';
-
-      // Create project in database
-      setUploadProgress('Creando proyecto...');
-      
-      // Convertir año a fecha completa (01/01/YYYY) y luego a ISO string (YYYY-MM-DD)
+      // Convertir año a fecha completa (YYYY-MM-DD)
       let fechaString: string | undefined = undefined;
       if (formData.fecha) {
         const year = formData.fecha.trim();
-        // Crear fecha como 01/01/YYYY y convertir a ISO string (YYYY-MM-DD)
         fechaString = `${year}-01-01`;
       }
-      
-      const projectData = {
+
+      // Usar el método transaccional que hace rollback si falla
+      const createData: CreateProjectWithFilesData = {
         titulo: formData.titulo,
-        img: coverImage,
         ubicacion: formData.ubicacion || undefined,
-        fecha: fechaString || undefined,
+        fecha: fechaString,
         descripcion: formData.descripcion,
-        galeria: galleryUrls,
         categoria: formData.categoria,
+        files: files.map((f) => f.file),
+        coverIndex: selectedCoverIndex ?? undefined,
+        onProgress: (message) => setUploadProgress(message),
       };
-      console.log('Creating project with data:', projectData);
-      await projectService.create(projectData);
+
+      await projectService.createWithFiles(createData);
 
       // Cleanup previews
       files.forEach((f) => URL.revokeObjectURL(f.preview));

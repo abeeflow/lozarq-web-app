@@ -51,13 +51,18 @@ export default function AdminProjectsEdit() {
         }
       }
       
+      // Capitalizar la categoría si existe (la BD guarda en minúsculas)
+      const categoriaCapitalized = project.categoria
+        ? (project.categoria.charAt(0).toUpperCase() + project.categoria.slice(1)) as 'Residencial' | 'Infantil' | 'Comercial' | 'Corporativo'
+        : '';
+
       setFormData({
         titulo: project.titulo,
         img: project.img || '',
         ubicacion: project.ubicacion || '',
         fecha: fechaFormatted,
         descripcion: project.descripcion,
-        categoria: project.categoria || '',
+        categoria: categoriaCapitalized,
       });
       setExistingGallery(project.galeria);
       // Find current cover index
