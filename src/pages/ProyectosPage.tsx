@@ -160,14 +160,19 @@ export default function ProyectosPage() {
         <div className="max-w-[1280px] mx-auto h-full min-h-0">
           <main className="h-full flex flex-col">
             {!showCategories && (
-              <h1
-                className={`${categoria && categoria.toLowerCase() === 'infantil'
-                  ? 'text-[1.1rem] font-light text-primary uppercase'
-                  : 'text-4xl md:text-5xl font-black text-text-light dark:text-text-dark'
-                } mb-8`}
-              >
-                {categoria && categoria.toLowerCase() === 'infantil' ? categoria.toUpperCase() : categoria}
-              </h1>
+              <div className="mb-8 flex flex-col gap-2">
+                {/* Botón de retroceso */}
+                <Link
+                  to="/proyectos"
+                  className="inline-flex items-center gap-2 text-primary text-sm hover:underline cursor-pointer bg-transparent border-0 p-1.5 w-fit"
+                >
+                  ← Volver a categorías
+                </Link>
+                {/* Título de la categoría */}
+                <h1 className="text-4xl md:text-5xl font-black text-text-light dark:text-text-dark">
+                  {categoria}
+                </h1>
+              </div>
             )}
 
             {/* Mostrar categorías cuando NO hay filtro */}
@@ -267,7 +272,7 @@ export default function ProyectosPage() {
                               />
                               
                               <div className="absolute bottom-0 left-0 right-0 bg-white px-6 md:px-8 py-4 md:py-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto shadow-sm">
-                                <h3 className={`text-text-light dark:text-text-dark text-xs font-light mb-3 ${categoria && categoria.toLowerCase() === 'infantil' ? 'uppercase' : ''}`}>
+                                <h3 className="text-text-light dark:text-text-dark text-xs font-light mb-3">
                                   {proyecto.titulo}
                                 </h3>
                                 <div className="flex items-center gap-2 text-text-light dark:text-text-dark transition-colors">
