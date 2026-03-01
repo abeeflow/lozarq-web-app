@@ -232,132 +232,121 @@ export default function ProyectosPage() {
                 {!loading && !error && proyectosFiltrados.length > 0 && (
                   <div className="flex-1 flex flex-col justify-center relative w-full">
                     {/* Contenedor del carrusel */}
-                    <div className="relative w-full">
-                      {/* Grid de proyectos - Mantiene exactamente el mismo layout */}
-                      <div 
-                        key={currentSlide}
-                        className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(12px,2.4vw,20px)] place-items-center justify-center animate-fade-in"
-                      >
-                        {getProjectsForCurrentSlide().map((proyecto) => {
-                          const imgSrc = proyecto.img || proyecto.galeria[0] || '';
-                          const isImageLoaded = loadedImages.has(imgSrc);
-                          const isFirstSlide = currentSlide === 0;
-
-                          return (
-                            <Link
-                              key={proyecto.id}
-                              to={`/proyectos/${proyecto.id}`}
-                              className="group relative block overflow-hidden rounded-2xl aspect-square md:aspect-[2/3] hover:shadow-2xl transition-all duration-300 w-full"
-                            >
-                              {/* Skeleton/Placeholder mientras carga */}
-                              {!isImageLoaded && (
-                                <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse flex items-center justify-center">
-                                  <div className="w-12 h-12 border-4 border-gray-300 dark:border-gray-600 border-t-primary rounded-full animate-spin"></div>
-                                </div>
-                              )}
-                              
-                              {/* Imagen */}
-                              <img
-                                src={imgSrc}
-                                alt={proyecto.titulo}
-                                className={`w-full h-full object-cover transition-opacity duration-300 ${
-                                  isImageLoaded ? 'opacity-100' : 'opacity-0'
-                                }`}
-                                loading={isFirstSlide ? 'eager' : 'lazy'}
-                                onLoad={() => {
-                                  if (imgSrc) {
-                                    setLoadedImages((prev) => new Set(prev).add(imgSrc));
-                                  }
-                                }}
-                              />
-                              
-                              <div className="absolute bottom-0 left-0 right-0 bg-white px-6 md:px-8 py-4 md:py-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto shadow-sm">
-                                <h3 className="text-text-light dark:text-text-dark text-xs font-light mb-3">
-                                  {proyecto.titulo}
-                                </h3>
-                                <div className="flex items-center gap-2 text-text-light dark:text-text-dark transition-colors">
-                                  <span className="text-[11px] font-light">Ver Proyecto</span>
-                                  <svg
-                                    className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                                    />
-                                  </svg>
-                                </div>
-                              </div>
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    {/* Controles de navegación: Flechas + Indicadores de paginación (dots) */}
-                    {totalSlides > 1 && (
-                      <div className="flex justify-center items-center gap-4 md:gap-6 mt-6 md:mt-8">
-                        {/* Flecha izquierda */}
+                    <div className="relative w-full flex items-center">
+                      {/* Flecha izquierda - Estilo como Servicios */}
+                      {totalSlides > 1 && (
                         <button
                           onClick={goToPrev}
-                          className="bg-white/90 hover:bg-white dark:bg-gray-800/90 dark:hover:bg-gray-800 rounded-full p-2 md:p-3 shadow-lg transition-all duration-300 hover:scale-110"
+                          disabled={currentSlide === 0}
+                          className={`flex absolute -left-4 sm:-left-5 md:-left-6 lg:-left-8 top-1/2 -translate-y-1/2 z-10 flex-shrink-0 transition-colors ${
+                            currentSlide === 0
+                              ? 'text-gray-300 dark:text-gray-700 cursor-not-allowed'
+                              : 'text-text-light dark:text-text-dark hover:text-primary'
+                          }`}
                           aria-label="Proyecto anterior"
                         >
-                          <svg
-                            className="w-5 h-5 md:w-6 md:h-6 text-text-light dark:text-text-dark"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M15 19l-7-7 7-7"
-                            />
-                          </svg>
+                          <span className="material-symbols-outlined text-xl sm:text-2xl md:text-3xl lg:text-4xl">chevron_left</span>
                         </button>
+                      )}
 
-                        {/* Indicadores de paginación (dots) */}
-                        <div className="flex justify-center items-center gap-2">
-                          {Array.from({ length: totalSlides }).map((_, index) => (
-                            <button
-                              key={index}
-                              onClick={() => goToSlide(index)}
-                              className={`transition-all duration-300 rounded-full ${
-                                index === currentSlide
-                                  ? 'w-8 h-2 bg-primary'
-                                  : 'w-2 h-2 bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
-                              }`}
-                              aria-label={`Ir al slide ${index + 1}`}
-                            />
-                          ))}
+                      {/* Grid de proyectos - Mantiene exactamente el mismo layout */}
+                      <div className="w-full">
+                        <div 
+                          key={currentSlide}
+                          className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(12px,2.4vw,20px)] place-items-center justify-center animate-fade-in"
+                        >
+                          {getProjectsForCurrentSlide().map((proyecto) => {
+                            const imgSrc = proyecto.img || proyecto.galeria[0] || '';
+                            const isImageLoaded = loadedImages.has(imgSrc);
+                            const isFirstSlide = currentSlide === 0;
+
+                            return (
+                              <Link
+                                key={proyecto.id}
+                                to={`/proyectos/${proyecto.id}`}
+                                className="group relative block overflow-hidden rounded-2xl aspect-square md:aspect-[2/3] hover:shadow-2xl transition-all duration-300 w-full"
+                              >
+                                {/* Skeleton/Placeholder mientras carga */}
+                                {!isImageLoaded && (
+                                  <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse flex items-center justify-center">
+                                    <div className="w-12 h-12 border-4 border-gray-300 dark:border-gray-600 border-t-primary rounded-full animate-spin"></div>
+                                  </div>
+                                )}
+                                
+                                {/* Imagen */}
+                                <img
+                                  src={imgSrc}
+                                  alt={proyecto.titulo}
+                                  className={`w-full h-full object-cover transition-opacity duration-300 ${
+                                    isImageLoaded ? 'opacity-100' : 'opacity-0'
+                                  }`}
+                                  loading={isFirstSlide ? 'eager' : 'lazy'}
+                                  onLoad={() => {
+                                    if (imgSrc) {
+                                      setLoadedImages((prev) => new Set(prev).add(imgSrc));
+                                    }
+                                  }}
+                                />
+                                
+                                <div className="absolute bottom-0 left-0 right-0 bg-white px-6 md:px-8 py-4 md:py-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto shadow-sm">
+                                  <h3 className="text-text-light dark:text-text-dark text-xs font-light mb-3">
+                                    {proyecto.titulo}
+                                  </h3>
+                                  <div className="flex items-center gap-2 text-text-light dark:text-text-dark transition-colors">
+                                    <span className="text-[11px] font-light">Ver Proyecto</span>
+                                    <svg
+                                      className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                      />
+                                    </svg>
+                                  </div>
+                                </div>
+                              </Link>
+                            );
+                          })}
                         </div>
+                      </div>
 
-                        {/* Flecha derecha */}
+                      {/* Flecha derecha - Estilo como Servicios */}
+                      {totalSlides > 1 && (
                         <button
                           onClick={goToNext}
-                          className="bg-white/90 hover:bg-white dark:bg-gray-800/90 dark:hover:bg-gray-800 rounded-full p-2 md:p-3 shadow-lg transition-all duration-300 hover:scale-110"
+                          disabled={currentSlide === totalSlides - 1}
+                          className={`flex absolute -right-4 sm:-right-5 md:-right-6 lg:-right-8 top-1/2 -translate-y-1/2 z-10 flex-shrink-0 transition-colors ${
+                            currentSlide === totalSlides - 1
+                              ? 'text-gray-300 dark:text-gray-700 cursor-not-allowed'
+                              : 'text-text-light dark:text-text-dark hover:text-primary'
+                          }`}
                           aria-label="Siguiente proyecto"
                         >
-                          <svg
-                            className="w-5 h-5 md:w-6 md:h-6 text-text-light dark:text-text-dark"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 5l7 7-7 7"
-                            />
-                          </svg>
+                          <span className="material-symbols-outlined text-xl sm:text-2xl md:text-3xl lg:text-4xl">chevron_right</span>
                         </button>
+                      )}
+                    </div>
+
+                    {/* Indicadores de paginación (dots) - Solo los dots, sin flechas */}
+                    {totalSlides > 1 && (
+                      <div className="flex justify-center items-center gap-2 mt-6 md:mt-8">
+                        {Array.from({ length: totalSlides }).map((_, index) => (
+                          <button
+                            key={index}
+                            onClick={() => goToSlide(index)}
+                            className={`transition-all duration-300 rounded-full ${
+                              index === currentSlide
+                                ? 'w-8 h-2 bg-primary'
+                                : 'w-2 h-2 bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
+                            }`}
+                            aria-label={`Ir al slide ${index + 1}`}
+                          />
+                        ))}
                       </div>
                     )}
                   </div>
