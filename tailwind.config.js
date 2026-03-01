@@ -23,6 +23,15 @@ export default {
         "xl": "0.75rem",
         "full": "9999px"
       },
+      keyframes: {
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+      },
+      animation: {
+        'fade-in': 'fade-in 0.5s ease-in-out',
+      },
     },
   },
   plugins: [],
