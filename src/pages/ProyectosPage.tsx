@@ -2,48 +2,30 @@ import { useState, useEffect, useRef } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import ProjectCard from '../components/ProjectCard';
 import { useProjects } from '../hooks/useProjects';
 import { usePageSEO } from '../hooks/usePageSEO';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const CATEGORIAS = [
   { nombre: 'Residencial', imagen: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800' },
   { nombre: 'Infantil', imagen: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800' },
   { nombre: 'Comercial', imagen: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800' },
-  { nombre: 'Corporativo', imagen: 'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=800' },
+  { nombre: 'Corporativo', imagen: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800' },
 ];
 
 export default function ProyectosPage() {
+  const { t } = useLanguage();
   const [searchParams] = useSearchParams();
   const categoria = searchParams.get('categoria');
   const { projects, loading, error } = useProjects();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const preloadedImagesRef = useRef<Set<string>>(new Set());
-  const ITEMS_PER_SLIDE = 4; // Mantener siempre 4 proyectos por vista
-
-  // Log de todos los proyectos obtenidos
-  console.log('📊 PROYECTOS OBTENIDOS DE LA BD:', {
-    total: projects.length,
-    proyectos: projects,
-    categoriaFiltro: categoria || 'Todas',
-    proyectosPorCategoria: projects.reduce((acc, p) => {
-      const cat = p.categoria || 'Sin categoría';
-      acc[cat] = (acc[cat] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>)
-  });
+  const ITEMS_PER_SLIDE = 4;
 
   const proyectosFiltrados = categoria
     ? projects.filter(p => p.categoria?.toLowerCase() === categoria.toLowerCase())
     : projects;
-
-  // Log de proyectos filtrados
-  console.log('🔍 PROYECTOS FILTRADOS:', {
-    categoria: categoria || 'Todas',
-    cantidad: proyectosFiltrados.length,
-    proyectos: proyectosFiltrados
-  });
 
   // Calcular total de slides (grupos de 4 proyectos)
   const totalSlides = Math.ceil(proyectosFiltrados.length / ITEMS_PER_SLIDE);
@@ -160,16 +142,15 @@ export default function ProyectosPage() {
         <div className="max-w-[1280px] mx-auto h-full min-h-0">
           <main className="h-full flex flex-col">
             {!showCategories && (
-              <div className="mb-8 flex flex-col gap-2">
-                {/* Botón de retroceso */}
+              <div className="mb-6 flex flex-col gap-3">
                 <Link
                   to="/proyectos"
-                  className="inline-flex items-center gap-2 text-primary text-sm hover:underline cursor-pointer bg-transparent border-0 p-1.5 w-fit"
+                  className="group inline-flex items-center gap-2 text-sm font-light tracking-[0.1em] text-text-light/50 dark:text-text-dark/50 hover:text-text-light dark:hover:text-text-dark transition-colors duration-300 w-fit"
                 >
-                  ← Volver a categorías
+                  <span className="transition-transform duration-300 group-hover:-translate-x-1">&larr;</span>
+                  {t.proyectos.volverCategorias}
                 </Link>
-                {/* Título de la categoría */}
-                <h1 className="text-4xl md:text-5xl font-black text-text-light dark:text-text-dark">
+                <h1 className="text-2xl md:text-3xl font-light tracking-[0.1em] text-text-light dark:text-text-dark">
                   {categoria}
                 </h1>
               </div>
@@ -178,18 +159,28 @@ export default function ProyectosPage() {
             {/* Mostrar categorías cuando NO hay filtro */}
             {showCategories && (
               <div className="flex-1 grid place-items-center">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(12px,2.4vw,20px)] place-items-center justify-center">
-                  {CATEGORIAS.map((cat, index) => (
-                    <div key={cat.nombre} className="min-h-0 w-full">
-                      <ProjectCard
-                        id={index}
-                        titulo={cat.nombre}
-                        categoriaTitulo={cat.nombre}
-                        img={cat.imagen}
-                        size="aspect-square md:aspect-[2/3] w-full"
-                        customLink={`/proyectos?categoria=${cat.nombre}`}
-                      />
-                    </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(16px,3vw,32px)] place-items-center justify-center">
+                  {CATEGORIAS.map((cat) => (
+                    <Link
+                      key={cat.nombre}
+                      to={`/proyectos?categoria=${cat.nombre}`}
+                      className="group w-full flex flex-col"
+                    >
+                      <div className="overflow-hidden rounded-lg w-full aspect-square md:aspect-[2/3]">
+                        <img
+                          src={cat.imagen}
+                          alt={cat.nombre}
+                          className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div className="mt-3 flex flex-col items-center">
+                        <span className="text-sm font-light tracking-[0.15em] text-text-light/70 dark:text-text-dark/70 group-hover:text-text-light dark:group-hover:text-text-dark transition-colors duration-300">
+                          {cat.nombre}
+                        </span>
+                        <div className="mt-1.5 h-px bg-primary transition-all duration-300 w-0 group-hover:w-full"></div>
+                      </div>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -202,7 +193,7 @@ export default function ProyectosPage() {
                   <div className="flex-1 flex items-center justify-center">
                     <div className="text-center">
                       <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent"></div>
-                      <p className="mt-4 text-gray-600 dark:text-gray-400">Cargando proyectos...</p>
+                      <p className="mt-4 text-gray-600 dark:text-gray-400">{t.proyectos.cargando}</p>
                     </div>
                   </div>
                 )}
@@ -218,12 +209,12 @@ export default function ProyectosPage() {
                 {!loading && !error && proyectosFiltrados.length === 0 && (
                   <div className="flex-1 flex items-center justify-center">
                     <div className="text-center">
-                      <p className="text-gray-600 dark:text-gray-400">No hay proyectos en esta categoría</p>
+                      <p className="text-gray-600 dark:text-gray-400">{t.proyectos.noProyectos}</p>
                       <Link
                         to="/proyectos"
-                        className="mt-4 inline-block text-primary hover:underline"
+                        className="mt-4 inline-block text-sm font-light tracking-[0.1em] text-primary hover:text-primary/70 transition-colors duration-300"
                       >
-                        ← Volver a categorías
+                        &larr; {t.proyectos.volverCategorias}
                       </Link>
                     </div>
                   </div>
@@ -251,9 +242,9 @@ export default function ProyectosPage() {
 
                       {/* Grid de proyectos - Mantiene exactamente el mismo layout */}
                       <div className="w-full">
-                        <div 
+                        <div
                           key={currentSlide}
-                          className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(12px,2.4vw,20px)] place-items-center justify-center animate-fade-in"
+                          className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(16px,3vw,32px)] place-items-center justify-center animate-fade-in"
                         >
                           {getProjectsForCurrentSlide().map((proyecto) => {
                             const imgSrc = proyecto.img || proyecto.galeria[0] || '';
@@ -264,50 +255,31 @@ export default function ProyectosPage() {
                               <Link
                                 key={proyecto.id}
                                 to={`/proyectos/${proyecto.id}`}
-                                className="group relative block overflow-hidden rounded-2xl aspect-square md:aspect-[2/3] hover:shadow-2xl transition-all duration-300 w-full"
+                                className="group w-full flex flex-col"
                               >
-                                {/* Skeleton/Placeholder mientras carga */}
-                                {!isImageLoaded && (
-                                  <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse flex items-center justify-center">
-                                    <div className="w-12 h-12 border-4 border-gray-300 dark:border-gray-600 border-t-primary rounded-full animate-spin"></div>
-                                  </div>
-                                )}
-                                
-                                {/* Imagen */}
-                                <img
-                                  src={imgSrc}
-                                  alt={proyecto.titulo}
-                                  className={`w-full h-full object-cover transition-opacity duration-300 ${
-                                    isImageLoaded ? 'opacity-100' : 'opacity-0'
-                                  }`}
-                                  loading={isFirstSlide ? 'eager' : 'lazy'}
-                                  onLoad={() => {
-                                    if (imgSrc) {
-                                      setLoadedImages((prev) => new Set(prev).add(imgSrc));
-                                    }
-                                  }}
-                                />
-                                
-                                <div className="absolute bottom-0 left-0 right-0 bg-white px-6 md:px-8 py-4 md:py-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto shadow-sm">
-                                  <h3 className="text-text-light dark:text-text-dark text-xs font-light mb-3">
+                                <div className="relative overflow-hidden rounded-lg w-full aspect-square md:aspect-[2/3]">
+                                  {!isImageLoaded && (
+                                    <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 animate-pulse"></div>
+                                  )}
+                                  <img
+                                    src={imgSrc}
+                                    alt={proyecto.titulo}
+                                    className={`w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-[1.02] ${
+                                      isImageLoaded ? 'opacity-100' : 'opacity-0'
+                                    }`}
+                                    loading={isFirstSlide ? 'eager' : 'lazy'}
+                                    onLoad={() => {
+                                      if (imgSrc) {
+                                        setLoadedImages((prev) => new Set(prev).add(imgSrc));
+                                      }
+                                    }}
+                                  />
+                                </div>
+                                <div className="mt-3 flex flex-col items-center">
+                                  <span className="text-sm font-light tracking-[0.15em] text-text-light/70 dark:text-text-dark/70 group-hover:text-text-light dark:group-hover:text-text-dark transition-colors duration-300">
                                     {proyecto.titulo}
-                                  </h3>
-                                  <div className="flex items-center gap-2 text-text-light dark:text-text-dark transition-colors">
-                                    <span className="text-[11px] font-light">Ver Proyecto</span>
-                                    <svg
-                                      className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      viewBox="0 0 24 24"
-                                    >
-                                      <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                                      />
-                                    </svg>
-                                  </div>
+                                  </span>
+                                  <div className="mt-1.5 h-px bg-primary transition-all duration-300 w-0 group-hover:w-full"></div>
                                 </div>
                               </Link>
                             );

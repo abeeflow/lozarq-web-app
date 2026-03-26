@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import { LanguageProvider } from './contexts/LanguageContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import HomePage from './pages/HomePage';
 import ProyectosPage from './pages/ProyectosPage';
@@ -24,6 +25,7 @@ function PublicLayout({ children }: { children: React.ReactNode }) {
 
 function App() {
   return (
+    <LanguageProvider>
     <AuthProvider>
       <Router>
         <Routes>
@@ -45,6 +47,7 @@ function App() {
         </Routes>
       </Router>
     </AuthProvider>
+    </LanguageProvider>
   );
 }
 

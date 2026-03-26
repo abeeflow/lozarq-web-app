@@ -128,14 +128,10 @@ export const projectService = {
       // Rollback: Eliminar archivos subidos si falla la creación
       if (uploadedFiles.length > 0) {
         onProgress?.('Error al crear proyecto. Limpiando archivos...');
-        console.log('Iniciando rollback. Archivos a eliminar:', uploadedFiles.map(f => f.path));
 
-        // Eliminar uno por uno para asegurar que se borren todos
         for (const file of uploadedFiles) {
           try {
-            console.log('Eliminando archivo:', file.path);
             await storageService.deleteFile(file.path);
-            console.log('Archivo eliminado exitosamente:', file.path);
           } catch (cleanupError) {
             console.error('Error eliminando archivo:', file.path, cleanupError);
           }

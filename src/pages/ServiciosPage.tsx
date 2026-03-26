@@ -2,17 +2,21 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useLanguage } from '../contexts/LanguageContext';
 
 import { usePageSEO } from '../hooks/usePageSEO';
 
-const servicios = [
-  { icono: 'holiday_village', titulo: 'Diseño Interior', desc: 'Transformación de espacios para elevar estética, funcionalidad y confort, creando ambientes que reflejan personalidad y estilo.' },
-  { icono: 'format_paint', titulo: 'Consultoría diseño', desc: 'Asesoría profesional para tomar decisiones claras sobre materiales, distribución, iluminación y acabados, optimizando el resultado final de cada proyecto.' },
-  { icono: 'chair', titulo: 'Mobiliario', desc: 'Diseño y fabricación de mobiliario a medida, creado para adaptarse al espacio y potenciar su uso con piezas únicas, funcionales y atemporales.' },
-  { icono: 'architecture', titulo: 'Arquitectura & Construcción', desc: 'Desarrollo integral de proyectos desde la idea hasta la ejecución, asegurando soluciones técnicas eficientes, materiales de calidad y construcción responsable.' },
-  ];
+const ICONOS = ['holiday_village', 'format_paint', 'chair', 'architecture'];
 
 export default function ServiciosPage() {
+  const { t } = useLanguage();
+
+  const servicios = [
+    { icono: ICONOS[0], titulo: t.servicios.disenoInterior, desc: t.servicios.disenoInteriorDesc },
+    { icono: ICONOS[1], titulo: t.servicios.consultoria, desc: t.servicios.consultoriaDesc },
+    { icono: ICONOS[2], titulo: t.servicios.mobiliario, desc: t.servicios.mobiliarioDesc },
+    { icono: ICONOS[3], titulo: t.servicios.arquitectura, desc: t.servicios.arquitecturaDesc },
+  ];
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsPerView, setCardsPerView] = useState(1);
   
@@ -125,15 +129,18 @@ export default function ServiciosPage() {
     <div className="relative flex flex-col h-screen w-full bg-background-light dark:bg-background-dark overflow-hidden">
       <Header />
       <div className="flex-1 w-full flex items-center justify-center min-h-0">
-        <div className="w-full max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-[clamp(16px,4vw,56px)] h-full flex items-center justify-center">
+        <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 md:px-10 lg:px-16 h-full flex items-center justify-center">
           <main className="w-full flex flex-col items-center justify-center h-full">
-            <div className="text-center mb-[50px] px-2 flex-shrink-0 w-full">
-              <p className="text-xs sm:text-sm md:text-base lg:text-lg text-text-light/70 dark:text-text-dark/70 max-w-3xl mx-auto">
-                Combinamos creatividad y experiencia para transformar espacios.
+            <div className="text-center mb-10 sm:mb-12 px-2 flex-shrink-0 w-full">
+              <p className="text-xs sm:text-sm font-light tracking-[0.15em] text-text-light/50 dark:text-text-dark/50 mb-3">
+                {t.servicios.tagline}
+              </p>
+              <p className="text-sm sm:text-base font-light text-text-light/70 dark:text-text-dark/70 max-w-2xl mx-auto leading-relaxed">
+                {t.servicios.subtitulo}
               </p>
             </div>
 
-            <div className="relative my-[5px] flex items-center justify-center w-full min-h-[240px] sm:min-h-[260px] md:min-h-[280px] lg:min-h-[300px]">
+            <div className="relative flex items-center justify-center w-full min-h-[240px] sm:min-h-[260px] md:min-h-[280px] lg:min-h-[300px]">
               {/* Navigation buttons */}
               <button
                 onClick={prevSlide}
@@ -143,15 +150,15 @@ export default function ServiciosPage() {
                     ? 'text-gray-300 dark:text-gray-700 cursor-not-allowed'
                     : 'text-text-light dark:text-text-dark hover:text-primary'
                 }`}
-                aria-label="Página anterior"
+                aria-label="Pagina anterior"
               >
                 <span className="material-symbols-outlined text-xl sm:text-2xl md:text-3xl lg:text-4xl">chevron_left</span>
               </button>
 
-              <div className="overflow-hidden w-full h-full min-h-[240px] sm:min-h-[260px] md:min-h-[280px] lg:min-h-[300px]" style={{ overflowX: 'hidden', overflowY: 'hidden' }}>
-                <div 
-                  className="flex transition-transform duration-500 ease-in-out h-full" 
-                  style={{ 
+              <div className="overflow-hidden w-full h-full min-h-[240px] sm:min-h-[260px] md:min-h-[280px] lg:min-h-[300px]">
+                <div
+                  className="flex transition-transform duration-500 ease-in-out h-full"
+                  style={{
                     transform: `translateX(-${currentIndex * 100}%)`,
                   }}
                 >
@@ -167,15 +174,18 @@ export default function ServiciosPage() {
                             className="flex-shrink-0 h-full"
                             style={{ width: cardWidth }}
                           >
-                            <div className="flex flex-col items-center justify-center gap-1 sm:gap-1.5 md:gap-2 lg:gap-2.5 xl:gap-3 h-full min-h-[240px] sm:min-h-[260px] md:min-h-[280px] lg:min-h-[300px] rounded-md sm:rounded-lg md:rounded-xl border border-gray-200 dark:border-gray-800 bg-background-light dark:bg-background-dark p-2 sm:p-2.5 md:p-3 lg:p-4 hover:shadow-lg transition-all duration-300">
-                              <div className="text-primary flex-shrink-0">
+                            <div className="group flex flex-col items-center justify-center gap-2 sm:gap-3 md:gap-4 h-full min-h-[240px] sm:min-h-[260px] md:min-h-[280px] lg:min-h-[300px] p-4 sm:p-5 md:p-6 transition-all duration-300">
+                              <div className="text-primary/70 group-hover:text-primary flex-shrink-0 transition-colors duration-300">
                                 {renderIcon(servicio.icono)}
                               </div>
+                              <div className="flex justify-center">
+                                <div className="w-8 h-px bg-primary/20 group-hover:w-12 transition-all duration-300"></div>
+                              </div>
                               <div className="text-center w-full flex-1 flex flex-col justify-center">
-                                <h2 className="text-[clamp(0.8rem,1.5vw,1.2rem)] sm:text-[clamp(0.9rem,1.8vw,1.3rem)] md:text-[clamp(1rem,2vw,1.4rem)] font-bold text-text-light dark:text-text-dark mb-0.5 sm:mb-1 md:mb-1.5 lg:mb-2 px-1 sm:px-1.5">
+                                <h2 className="text-sm sm:text-base md:text-lg font-light tracking-[0.1em] text-text-light dark:text-text-dark mb-2 sm:mb-3">
                                   {servicio.titulo}
                                 </h2>
-                                <p className="text-[clamp(0.65rem,0.9vw,0.8rem)] sm:text-[clamp(0.7rem,1vw,0.9rem)] md:text-[clamp(0.75rem,1.1vw,0.95rem)] text-text-light/70 dark:text-text-dark/70 leading-tight sm:leading-snug md:leading-normal px-1 sm:px-1.5">
+                                <p className="text-xs sm:text-sm font-light text-text-light/50 dark:text-text-dark/50 leading-relaxed px-1 sm:px-2">
                                   {servicio.desc}
                                 </p>
                               </div>
@@ -196,39 +206,41 @@ export default function ServiciosPage() {
                     ? 'text-gray-300 dark:text-gray-700 cursor-not-allowed'
                     : 'text-text-light dark:text-text-dark hover:text-primary'
                 }`}
-                aria-label="Página siguiente"
+                aria-label="Pagina siguiente"
               >
                 <span className="material-symbols-outlined text-xl sm:text-2xl md:text-3xl lg:text-4xl">chevron_right</span>
               </button>
             </div>
 
-            <div className="flex justify-center items-center gap-1.5 sm:gap-2 mb-2 sm:mb-2.5 md:mb-3 flex-shrink-0 w-full">
+            <div className="flex justify-center items-center gap-1.5 sm:gap-2 mb-4 flex-shrink-0 w-full">
               {Array.from({ length: totalPages }).map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => goToSlide(idx)}
-                  className={`h-1.5 sm:h-2 rounded-full transition-all ${
+                  className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 ${
                     idx === currentIndex
                       ? 'bg-primary w-5 sm:w-6 md:w-8'
                       : 'bg-gray-300 dark:bg-gray-600 w-1.5 sm:w-2'
                   }`}
-                  aria-label={`Ir a la página ${idx + 1}`}
+                  aria-label={`Ir a la pagina ${idx + 1}`}
                 />
               ))}
             </div>
 
-            <div className="text-center px-2 flex-shrink-0 w-full mt-[30px]">
-              <h2 className="text-[clamp(0.85rem,1.8vw,1.2rem)] font-bold text-gray-600 dark:text-gray-300/70 mb-1 sm:mb-1.5 md:mb-2">
-                ¿Tienes una idea en mente?
-              </h2>
-              <p className="text-[clamp(0.7rem,1vw,0.85rem)] text-text-light/70 dark:text-text-dark/70 mb-1.5 sm:mb-2 max-w-2xl mx-auto">
-                Hablemos de cómo podemos ayudarte a hacerla realidad.
+            {/* Separator */}
+            <div className="flex justify-center my-6 sm:my-8 flex-shrink-0 w-full">
+              <div className="w-[30%] h-px bg-primary/20"></div>
+            </div>
+
+            <div className="text-center px-2 flex-shrink-0 w-full">
+              <p className="text-sm sm:text-base font-light text-text-light/60 dark:text-text-dark/60 mb-4 max-w-xl mx-auto leading-relaxed">
+                {t.servicios.ctaTexto}
               </p>
               <Link
                 to="/contacto"
-                className="inline-block px-3 sm:px-4 md:px-5 py-1 sm:py-1.5 md:py-2 bg-primary text-white text-[clamp(0.75rem,1vw,0.9rem)] font-bold rounded-lg hover:bg-opacity-90 transition-colors"
+                className="inline-block px-8 py-3 bg-primary text-white text-sm font-light tracking-[0.1em] rounded hover:bg-primary/90 transition-colors duration-300"
               >
-                Iniciar un Proyecto
+                {t.servicios.ctaBoton}
               </Link>
             </div>
 

@@ -12,7 +12,10 @@
       "Bash(exit 0)",
       "Bash(if exist \"node_modules\\.vite\" rmdir /S /Q \"node_modules\\.vite\")",
       "Bash(if exist \"dist\" rmdir /S /Q \"dist\")",
-      "Bash(npm run preview:*)"
+      "Bash(npm run preview:*)",
+      "Bash(npx vite:*)",
+      "Bash(npx tsc:*)",
+      "Bash(ls -la /mnt/c/Users/usuario/Documents/GitHub/lozarq-web-app/src/**/*.css)"
     ],
     "deny": [],
     "ask": []

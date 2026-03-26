@@ -90,13 +90,6 @@ export const mockCreateBooking = async (bookingData: BookingFormData): Promise<B
       google_event_id: `mock_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
     });
 
-    console.log('📅 Booking Created in Supabase:', {
-      id: booking.id,
-      fecha: booking.fecha,
-      hora: booking.hora,
-      nombre: booking.nombre,
-    });
-
     // In production, this would also:
     // 1. Create event in Google Calendar via API
     // 2. Update booking with google_calendar_link
@@ -140,8 +133,6 @@ export const mockUpdateBusinessHours = async (
   await new Promise(resolve => setTimeout(resolve, 500));
 
   // In production, update in Supabase database
-  console.log('⚙️ Mock Business Hours Updated:', businessHours);
-
   return {
     success: true,
     message: 'Horarios actualizados exitosamente',
@@ -161,12 +152,6 @@ export const mockCancelBooking = async (
 
   try {
     await supabaseBookingService.cancel(eventId);
-
-    console.log('❌ Booking Cancelled in Supabase:', {
-      eventId,
-      date,
-      time,
-    });
 
     return {
       success: true,

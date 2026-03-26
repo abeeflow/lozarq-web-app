@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { usePageSEO } from '../hooks/usePageSEO';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function ContactoPage() {
+  const { t } = useLanguage();
   const [scale, setScale] = useState(0.85);
   const [containerStyle, setContainerStyle] = useState({
     width: '117.65%',
@@ -73,20 +75,23 @@ export default function ContactoPage() {
   return (
     <div className="relative grid h-screen w-full grid-rows-[auto,1fr,auto] bg-background-light dark:bg-background-dark overflow-hidden">
       <Header />
-      <div className="min-h-0 px-1 sm:px-2 md:px-3 lg:px-4 xl:px-5 2xl:px-6 py-0.5 sm:py-1 md:py-1.5 lg:py-2 xl:py-2.5 2xl:py-3">
+      <div className="min-h-0 px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-3">
         <div className="max-w-[1800px] mx-auto w-full h-full flex flex-col min-h-0">
           <main className="h-full min-h-0 flex flex-col">
             {/* Page Title */}
-            <div className="text-center mb-0.5 sm:mb-1 md:mb-1.5 lg:mb-2 xl:mb-2.5 px-2 sm:px-3 md:px-4 flex-shrink-0">
-              <p className="text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg text-text-light/70 dark:text-text-dark/70">
-                Selecciona el día y hora que mejor te convenga
+            <div className="text-center mb-3 sm:mb-4 px-2 flex-shrink-0">
+              <p className="text-xs font-light tracking-[0.2em] text-text-light/40 dark:text-text-dark/40 mb-2">
+                {t.contacto.tagline}
+              </p>
+              <p className="text-sm sm:text-base font-light text-text-light/60 dark:text-text-dark/60">
+                {t.contacto.subtitulo}
               </p>
             </div>
 
             {/* Google Calendar Embed */}
-            <div className="w-full mx-auto px-0 sm:px-0.5 md:px-1 lg:px-1.5 xl:px-2 flex-1 min-h-0 flex flex-col items-center justify-center">
-              <div className="relative w-full h-full flex-1 min-h-0 overflow-hidden rounded sm:rounded-md md:rounded-lg lg:rounded-xl xl:rounded-2xl bg-white dark:bg-gray-800">
-                <div 
+            <div className="w-full mx-auto flex-1 min-h-0 flex flex-col items-center justify-center">
+              <div className="relative w-full h-full flex-1 min-h-0 overflow-hidden rounded-lg bg-white dark:bg-gray-800">
+                <div
                   className="w-full h-full origin-center transition-transform duration-200 ease-out"
                   style={{
                     transform: `scale(${scale})`,

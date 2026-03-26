@@ -4,8 +4,10 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useProject } from '../hooks/useProjects';
 import { usePageSEO } from '../hooks/usePageSEO';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function ProyectoDetailPage() {
+  const { t } = useLanguage();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { project, loading, error } = useProject(Number(id));
@@ -146,14 +148,11 @@ export default function ProyectoDetailPage() {
   if (loading) {
     return (
       <div className="relative flex h-screen w-full flex-col bg-background-light dark:bg-background-dark">
-        <div className="flex-1 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 py-5 flex flex-col">
+        <div className="flex-1 px-6 sm:px-10 md:px-16 lg:px-24 xl:px-40 py-5 flex flex-col">
           <div className="max-w-[1280px] mx-auto flex-1 flex flex-col">
             <Header />
             <div className="flex-1 flex items-center justify-center">
-              <div className="text-center">
-                <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent"></div>
-                <p className="mt-4 text-gray-600 dark:text-gray-400">Cargando proyecto...</p>
-              </div>
+              <p className="text-sm font-light tracking-[0.1em] text-text-light/40 dark:text-text-dark/40">{t.proyectoDetalle.cargando}</p>
             </div>
           </div>
         </div>
@@ -165,19 +164,19 @@ export default function ProyectoDetailPage() {
   if (error || !project) {
     return (
       <div className="relative flex h-screen w-full flex-col bg-background-light dark:bg-background-dark">
-        <div className="flex-1 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 py-5 flex flex-col">
+        <div className="flex-1 px-6 sm:px-10 md:px-16 lg:px-24 xl:px-40 py-5 flex flex-col">
           <div className="max-w-[1280px] mx-auto flex-1 flex flex-col">
             <Header />
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center">
-                <p className="text-red-600 dark:text-red-400 mb-4">
-                  {error || 'Proyecto no encontrado'}
+                <p className="text-sm font-light tracking-[0.1em] text-text-light/40 dark:text-text-dark/40 mb-6">
+                  {error || t.proyectoDetalle.noEncontrado}
                 </p>
                 <Link
                   to="/proyectos"
-                  className="inline-block px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
+                  className="text-sm font-light tracking-[0.1em] text-primary hover:text-primary/70 transition-colors duration-300"
                 >
-                  ← Volver a proyectos
+                  &larr; {t.proyectoDetalle.volverAProyectos}
                 </Link>
               </div>
             </div>
@@ -188,50 +187,51 @@ export default function ProyectoDetailPage() {
     );
   }
 
+  // Meta info line: Categoria | Ubicacion | Año
+  const metaParts: string[] = [];
+  if (project.categoria) metaParts.push(project.categoria);
+  if (project.ubicacion) metaParts.push(project.ubicacion);
+  if (project.fecha) metaParts.push(new Date(project.fecha).getFullYear().toString());
+
   return (
     <div className="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark">
-      <div className="flex-1 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 pt-3 pb-5">
+      <div className="flex-1 px-6 sm:px-10 md:px-16 lg:px-24 xl:px-40 pt-3 pb-12">
         <div className="max-w-[1280px] mx-auto">
           <Header />
 
-          <main className="mt-8 relative z-10">
+          <main className="mt-6 sm:mt-8 relative z-10">
             {/* Back Button */}
             <button
               onClick={handleBack}
-              className="mb-4 -mt-3 inline-flex items-center gap-2 text-primary text-sm hover:underline cursor-pointer bg-transparent border-0 p-1.5 -ml-2 relative z-20"
+              className="group inline-flex items-center gap-2 text-sm font-light tracking-[0.1em] text-text-light/50 dark:text-text-dark/50 hover:text-text-light dark:hover:text-text-dark transition-colors duration-300 mb-8 bg-transparent border-0 cursor-pointer relative z-20"
               type="button"
             >
-              ← Volver al listado
+              <span className="transition-transform duration-300 group-hover:-translate-x-1">&larr;</span>
+              {t.proyectoDetalle.volver}
             </button>
 
             {/* Project Title */}
-            <h1 className="text-sm font-light uppercase text-text-light dark:text-text-dark mb-4">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-light tracking-[0.1em] text-text-light dark:text-text-dark mb-3">
               {project.titulo}
             </h1>
 
-            {/* Category */}
-            {project.categoria && (
-              <div className="mb-6">
-                <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-xs font-light uppercase tracking-wider">
-                  {project.categoria}
-                </span>
-              </div>
+            {/* Meta: Categoria | Ubicacion | Año */}
+            {metaParts.length > 0 && (
+              <p className="text-xs sm:text-sm font-light tracking-[0.15em] text-text-light/40 dark:text-text-dark/40 mb-8">
+                {metaParts.join('  |  ')}
+              </p>
             )}
 
             {/* Main Image */}
             {(project.img || project.galeria[0]) && (() => {
               const mainImageSrc = project.img || project.galeria[0];
               const isMainImageLoaded = loadedImages.has(mainImageSrc);
-              
+
               return (
-                <div className="mb-8 rounded-lg overflow-hidden shadow-xl relative">
-                  {/* Skeleton/Placeholder mientras carga */}
+                <div className="mb-10 rounded-lg overflow-hidden relative">
                   {!isMainImageLoaded && (
-                    <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse flex items-center justify-center">
-                      <div className="w-16 h-16 border-4 border-gray-300 dark:border-gray-600 border-t-primary rounded-full animate-spin"></div>
-                    </div>
+                    <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 animate-pulse"></div>
                   )}
-                  
                   <img
                     src={mainImageSrc}
                     alt={`${project.titulo} - Proyecto ${project.categoria}`}
@@ -252,99 +252,72 @@ export default function ProyectoDetailPage() {
               );
             })()}
 
-            {/* Project Info */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              {project.ubicacion && (
-                <div>
-                  <h3 className="text-sm font-light text-gray-500 dark:text-gray-400 uppercase mb-2">
-                    Ubicación
-                  </h3>
-                  <p className="text-base text-text-light dark:text-text-dark">
-                    {project.ubicacion}
-                  </p>
-                </div>
-              )}
-              {project.fecha && (
-                <div>
-                  <h3 className="text-sm font-light text-gray-500 dark:text-gray-400 uppercase mb-2">
-                    Fecha
-                  </h3>
-                  <p className="text-base text-text-light dark:text-text-dark">
-                    {new Date(project.fecha).getFullYear()}
-                  </p>
-                </div>
-              )}
-            </div>
-
             {/* Description */}
-            <div className="mb-12">
-              <h3 className="text-sm font-light uppercase text-text-light dark:text-text-dark mb-4">
-                Descripción
-              </h3>
-              <p className="text-base text-gray-700 dark:text-gray-300 whitespace-pre-line">
-                {project.descripcion}
-              </p>
-            </div>
+            {project.descripcion && (
+              <div className="mb-10 max-w-3xl">
+                <p className="text-sm sm:text-base font-light text-text-light/70 dark:text-text-dark/70 leading-relaxed whitespace-pre-line">
+                  {project.descripcion}
+                </p>
+              </div>
+            )}
+
+            {/* Separator */}
+            {project.galeria.length > 0 && (
+              <div className="flex justify-center mb-10">
+                <div className="w-[40%] h-px bg-primary/20"></div>
+              </div>
+            )}
 
             {/* Gallery */}
             {project.galeria.length > 0 && (
-              <div>
-                <h3 className="text-sm font-light uppercase text-text-light dark:text-text-dark mb-6">
-                  Galería
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {project.galeria.map((url, index) => {
-                    const isImageLoaded = loadedImages.has(url);
-                    const isVideo = url.endsWith('.mp4');
-                    
-                    return (
-                      <div
-                        key={index}
-                        className="aspect-square rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow relative"
-                      >
-                        {isVideo ? (
-                          <video
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[clamp(12px,2.5vw,24px)]">
+                {project.galeria.map((url, index) => {
+                  const isImageLoaded = loadedImages.has(url);
+                  const isVideo = url.endsWith('.mp4');
+
+                  return (
+                    <div
+                      key={index}
+                      className="group aspect-square rounded-lg overflow-hidden relative"
+                    >
+                      {isVideo ? (
+                        <video
+                          src={url}
+                          controls
+                          className="w-full h-full object-cover"
+                          preload="metadata"
+                        />
+                      ) : (
+                        <>
+                          {!isImageLoaded && (
+                            <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 animate-pulse"></div>
+                          )}
+                          <img
+                            ref={(el) => {
+                              if (el) {
+                                imageRefs.current.set(index, el);
+                              } else {
+                                imageRefs.current.delete(index);
+                              }
+                            }}
                             src={url}
-                            controls
-                            className="w-full h-full object-cover"
-                            preload="metadata"
+                            alt={`${project.titulo} - ${index + 1}`}
+                            className={`w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-[1.02] ${
+                              isImageLoaded ? 'opacity-100' : 'opacity-0'
+                            }`}
+                            loading={index < 12 ? 'eager' : 'lazy'}
+                            fetchPriority={index < 12 ? 'high' : 'auto'}
+                            onLoad={() => {
+                              if (url) {
+                                setLoadedImages((prev) => new Set(prev).add(url));
+                              }
+                            }}
                           />
-                        ) : (
-                          <>
-                            {/* Skeleton/Placeholder mientras carga */}
-                            {!isImageLoaded && (
-                              <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse flex items-center justify-center">
-                                <div className="w-12 h-12 border-4 border-gray-300 dark:border-gray-600 border-t-primary rounded-full animate-spin"></div>
-                              </div>
-                            )}
-                            
-                            <img
-                              ref={(el) => {
-                                if (el) {
-                                  imageRefs.current.set(index, el);
-                                } else {
-                                  imageRefs.current.delete(index);
-                                }
-                              }}
-                              src={url}
-                              alt={`${project.titulo} - ${index + 1}`}
-                              className={`w-full h-full object-cover hover:scale-105 transition-all duration-300 ${
-                                isImageLoaded ? 'opacity-100' : 'opacity-0'
-                              }`}
-                              loading={index < 12 ? 'eager' : 'lazy'}
-                              fetchPriority={index < 12 ? 'high' : 'auto'}
-                              onLoad={() => {
-                                if (url) {
-                                  setLoadedImages((prev) => new Set(prev).add(url));
-                                }
-                              }}
-                            />
-                          </>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
+                        </>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             )}
           </main>
