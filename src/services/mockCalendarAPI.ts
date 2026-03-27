@@ -127,7 +127,7 @@ export const mockGetBusinessHours = async (): Promise<BusinessHours> => {
  * Mock: Update business hours (Admin function)
  */
 export const mockUpdateBusinessHours = async (
-  businessHours: BusinessHours
+  _businessHours: BusinessHours
 ): Promise<{ success: boolean; message: string }> => {
   // Simulate API delay
   await new Promise(resolve => setTimeout(resolve, 500));
@@ -144,8 +144,8 @@ export const mockUpdateBusinessHours = async (
  */
 export const mockCancelBooking = async (
   eventId: string,
-  date: string,
-  time: string
+  _date: string,
+  _time: string
 ): Promise<{ success: boolean; message: string }> => {
   // Simulate API delay
   await new Promise(resolve => setTimeout(resolve, 500));
