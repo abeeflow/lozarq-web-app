@@ -56,6 +56,7 @@ export const translations = {
     contacto: {
       tagline: 'CONTACTO',
       subtitulo: 'Selecciona el dia y hora que mejor te convenga',
+      cargando: 'Cargando disponibilidad',
     },
     // Footer
     footer: {
@@ -119,6 +120,7 @@ export const translations = {
     contacto: {
       tagline: 'CONTACT',
       subtitulo: 'Select the day and time that suits you best',
+      cargando: 'Loading availability',
     },
     // Footer
     footer: {

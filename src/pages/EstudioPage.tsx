@@ -10,16 +10,16 @@ export default function EstudioPage() {
   return (
     <div className="relative grid h-screen w-full grid-rows-[auto,1fr,auto] bg-background-light dark:bg-background-dark overflow-hidden">
       <Header />
-      <div className="min-h-0 px-6 sm:px-8 md:px-10 lg:px-16 py-4 sm:py-6">
+      <div className="min-h-0 px-6 sm:px-8 md:px-10 lg:px-16 py-[clamp(8px,2vh,24px)]">
         <div className="mx-auto max-w-7xl h-full">
           <main className="h-full min-h-0 flex flex-col">
             <div className="grid grid-cols-1 md:grid-cols-2 flex-1 min-h-0 gap-8 md:gap-12 lg:gap-16 items-center">
               {/* Texto */}
-              <section className="flex flex-col justify-center h-full min-h-0 overflow-hidden space-y-6 sm:space-y-8">
+              <section className="flex flex-col justify-center h-full min-h-0 overflow-hidden space-y-[clamp(10px,2.6vh,32px)]">
                 <p className="text-xs font-light tracking-[0.2em] text-text-light/40 dark:text-text-dark/40">
                   {t.estudio.tagline}
                 </p>
-                <div className="space-y-4 max-w-lg text-sm sm:text-base font-light text-text-light/70 dark:text-text-dark/70 leading-relaxed text-justify">
+                <div className="space-y-[clamp(6px,1.6vh,16px)] max-w-lg text-[clamp(0.8125rem,1.75vh,1rem)] font-light text-text-light/70 dark:text-text-dark/70 leading-relaxed text-justify">
                   <p>{t.estudio.parrafo1}</p>
                   <p>{t.estudio.parrafo2}</p>
                 </div>

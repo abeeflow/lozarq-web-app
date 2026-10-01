@@ -7,6 +7,13 @@ import { useLanguage } from '../contexts/LanguageContext';
 export default function ContactoPage() {
   const { t } = useLanguage();
   const [scale, setScale] = useState(0.85);
+  const [calendarLoaded, setCalendarLoaded] = useState(false);
+
+  // Respaldo: si el iframe no dispara onLoad (bloqueado por el navegador o red), no dejar el loader indefinidamente
+  useEffect(() => {
+    const timer = window.setTimeout(() => setCalendarLoaded(true), 15000);
+    return () => window.clearTimeout(timer);
+  }, []);
   const [containerStyle, setContainerStyle] = useState({
     width: '117.65%',
     height: '117.65%',
@@ -91,6 +98,54 @@ export default function ContactoPage() {
             {/* Google Calendar Embed */}
             <div className="w-full mx-auto flex-1 min-h-0 flex flex-col items-center justify-center">
               <div className="relative w-full h-full flex-1 min-h-0 overflow-hidden rounded-lg bg-white dark:bg-gray-800">
+                {/* Loader: casa trazada como un plano mientras carga el calendario de Google */}
+                <div
+                  role="status"
+                  aria-live="polite"
+                  aria-hidden={calendarLoaded}
+                  className={`absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-white dark:bg-gray-800 transition-opacity duration-500 ${
+                    calendarLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'
+                  }`}
+                >
+                  <svg
+                    viewBox="0 0 64 64"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    className="w-14 h-14 sm:w-16 sm:h-16 text-primary"
+                  >
+                    {/* Línea de suelo (guía) */}
+                    <path d="M6 54H58" pathLength={1} strokeDasharray="1" className="opacity-30" />
+                    {/* Muros y cubierta */}
+                    <path
+                      d="M14 54V29L32 13L50 29V54"
+                      pathLength={1}
+                      strokeDasharray="1"
+                      className="animate-blueprint-draw motion-reduce:animate-none"
+                    />
+                    {/* Puerta */}
+                    <path
+                      d="M27 54V41H37V54"
+                      pathLength={1}
+                      strokeDasharray="1"
+                      className="animate-blueprint-draw motion-reduce:animate-none [animation-delay:250ms]"
+                    />
+                    {/* Ventana */}
+                    <path
+                      d="M38 30H44V36H38Z"
+                      pathLength={1}
+                      strokeDasharray="1"
+                      className="animate-blueprint-draw motion-reduce:animate-none [animation-delay:450ms]"
+                    />
+                  </svg>
+                  <p className="text-xs font-light tracking-[0.2em] uppercase text-text-light/50 dark:text-text-dark/50">
+                    {t.contacto.cargando}
+                    <span className="inline-block w-4 text-left animate-pulse">…</span>
+                  </p>
+                </div>
                 <div
                   className="w-full h-full origin-center transition-transform duration-200 ease-out"
                   style={{
@@ -105,7 +160,8 @@ export default function ContactoPage() {
                     frameBorder="0"
                     allowFullScreen
                     title="Agenda de disponibilidad"
-                    loading="lazy"
+                    loading="eager"
+                    onLoad={() => setCalendarLoaded(true)}
                     style={{ width: '100%', height: '100%' }}
                   />
                 </div>

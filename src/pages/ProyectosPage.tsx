@@ -156,11 +156,11 @@ export default function ProyectosPage() {
   return (
     <div className="relative grid h-screen w-full grid-rows-[auto,1fr,auto] bg-background-light dark:bg-background-dark">
       <Header />
-      <div className="min-h-0 h-full px-[clamp(12px,3.2vw,48px)] py-[clamp(12px,2.4vw,24px)] overflow-y-auto">
+      <div className="min-h-0 h-full px-[clamp(12px,3.2vw,48px)] py-[clamp(12px,2.4vh,24px)] overflow-hidden">
         <div className="max-w-[1280px] mx-auto h-full min-h-0">
-          <main className="h-full flex flex-col">
+          <main className="h-full min-h-0 flex flex-col">
             {!showCategories && (
-              <div className="mb-6 flex flex-col gap-3">
+              <div className="mb-[clamp(12px,3vh,24px)] flex flex-col gap-[clamp(4px,1.2vh,12px)] flex-shrink-0">
                 <Link
                   to="/proyectos"
                   className="group inline-flex items-center gap-2 text-sm font-light tracking-[0.1em] text-text-light/50 dark:text-text-dark/50 hover:text-text-light dark:hover:text-text-dark transition-colors duration-300 w-fit"
@@ -178,15 +178,15 @@ export default function ProyectosPage() {
                 Misma retícula y proporción que el listado de proyectos (ancho completo, 2 col. móvil / 4 col. desktop)
                 para que la transición categoría → proyectos sea continua. */}
             {showCategories && (
-              <div className="flex-1 flex flex-col justify-center w-full">
-                <div className="grid w-full grid-cols-2 md:grid-cols-4 gap-[clamp(16px,3vw,32px)]">
+              <div className="flex-1 min-h-0 w-full">
+                <div className="grid h-full w-full grid-cols-2 grid-rows-2 md:grid-cols-4 md:grid-rows-1 gap-[clamp(12px,3vw,32px)]">
                   {CATEGORIAS.map((cat) => (
                     <Link
                       key={cat.nombre}
                       to={`/proyectos?categoria=${cat.nombre}`}
-                      className="group w-full flex flex-col"
+                      className="group w-full h-full min-h-0 flex flex-col justify-center max-md:[&:nth-child(-n+2)]:justify-end max-md:[&:nth-child(n+3)]:justify-start"
                     >
-                      <div className="relative overflow-hidden rounded-lg w-full aspect-square md:aspect-[2/3] flex items-center justify-center bg-primary/[0.04] dark:bg-primary/[0.10]">
+                      <div className="relative overflow-hidden rounded-lg w-full aspect-square md:aspect-[2/3] max-h-[calc(100%-2.75rem)] flex items-center justify-center bg-primary/[0.04] dark:bg-primary/[0.10]">
                         {/* Halo difuminado detrás del icono */}
                         <div
                           aria-hidden="true"
@@ -207,8 +207,8 @@ export default function ProyectosPage() {
                           <path d={cat.path} />
                         </svg>
                       </div>
-                      <div className="mt-3 flex flex-col items-center">
-                        <span className="text-sm font-light tracking-[0.15em] text-text-light/70 dark:text-text-dark/70 group-hover:text-text-light dark:group-hover:text-text-dark transition-colors duration-300">
+                      <div className="mt-3 w-full flex flex-col items-center flex-shrink-0">
+                        <span className="max-w-full truncate px-1 text-sm font-light tracking-[0.15em] text-text-light/70 dark:text-text-dark/70 group-hover:text-text-light dark:group-hover:text-text-dark transition-colors duration-300">
                           {cat.nombre}
                         </span>
                         <div className="mt-1.5 h-px bg-primary transition-all duration-300 w-0 group-hover:w-full"></div>
@@ -254,9 +254,9 @@ export default function ProyectosPage() {
                 )}
 
                 {!loading && !error && proyectosFiltrados.length > 0 && (
-                  <div className="flex-1 flex flex-col justify-center relative w-full">
+                  <div className="flex-1 min-h-0 flex flex-col relative w-full">
                     {/* Contenedor del carrusel */}
-                    <div className="relative w-full flex items-center">
+                    <div className="relative w-full flex-1 min-h-0 flex items-center">
                       {/* Flecha izquierda - Estilo como Servicios */}
                       {totalSlides > 1 && (
                         <button
@@ -274,10 +274,10 @@ export default function ProyectosPage() {
                       )}
 
                       {/* Grid de proyectos - Mantiene exactamente el mismo layout */}
-                      <div className="w-full">
+                      <div className="w-full h-full">
                         <div
                           key={currentSlide}
-                          className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(16px,3vw,32px)] place-items-center justify-center animate-fade-in"
+                          className="grid h-full w-full grid-cols-2 grid-rows-2 md:grid-cols-4 md:grid-rows-1 gap-[clamp(12px,3vw,32px)] animate-fade-in"
                         >
                           {getProjectsForCurrentSlide().map((proyecto) => {
                             const imgSrc = proyecto.img || proyecto.galeria[0] || '';
@@ -288,9 +288,9 @@ export default function ProyectosPage() {
                               <Link
                                 key={proyecto.id}
                                 to={`/proyectos/${proyecto.id}`}
-                                className="group w-full flex flex-col"
+                                className="group w-full h-full min-h-0 flex flex-col justify-center max-md:[&:nth-child(-n+2)]:justify-end max-md:[&:nth-child(n+3)]:justify-start"
                               >
-                                <div className="relative overflow-hidden rounded-lg w-full aspect-square md:aspect-[2/3]">
+                                <div className="relative overflow-hidden rounded-lg w-full aspect-square md:aspect-[2/3] max-h-[calc(100%-2.75rem)]">
                                   {!isImageLoaded && (
                                     <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 animate-pulse"></div>
                                   )}
@@ -308,8 +308,8 @@ export default function ProyectosPage() {
                                     }}
                                   />
                                 </div>
-                                <div className="mt-3 flex flex-col items-center">
-                                  <span className="text-sm font-light tracking-[0.15em] text-text-light/70 dark:text-text-dark/70 group-hover:text-text-light dark:group-hover:text-text-dark transition-colors duration-300">
+                                <div className="mt-3 w-full flex flex-col items-center flex-shrink-0">
+                                  <span className="max-w-full truncate px-1 text-sm font-light tracking-[0.15em] text-text-light/70 dark:text-text-dark/70 group-hover:text-text-light dark:group-hover:text-text-dark transition-colors duration-300">
                                     {proyecto.titulo}
                                   </span>
                                   <div className="mt-1.5 h-px bg-primary transition-all duration-300 w-0 group-hover:w-full"></div>
@@ -339,7 +339,7 @@ export default function ProyectosPage() {
 
                     {/* Indicadores de paginación (dots) - Solo los dots, sin flechas */}
                     {totalSlides > 1 && (
-                      <div className="flex justify-center items-center gap-2 mt-6 md:mt-8">
+                      <div className="flex justify-center items-center gap-2 mt-[clamp(8px,2.5vh,28px)] flex-shrink-0">
                         {Array.from({ length: totalSlides }).map((_, index) => (
                           <button
                             key={index}

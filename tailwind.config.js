@@ -28,9 +28,17 @@ export default {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
+        // Trazo tipo plano: la línea se dibuja, se sostiene y se desvanece
+        'blueprint-draw': {
+          '0%': { strokeDashoffset: '1', opacity: '1' },
+          '55%': { strokeDashoffset: '0', opacity: '1' },
+          '85%': { strokeDashoffset: '0', opacity: '1' },
+          '100%': { strokeDashoffset: '0', opacity: '0' },
+        },
       },
       animation: {
         'fade-in': 'fade-in 0.5s ease-in-out',
+        'blueprint-draw': 'blueprint-draw 2.6s ease-in-out infinite',
       },
     },
   },

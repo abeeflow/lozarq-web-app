@@ -126,13 +126,13 @@ export default function ServiciosPage() {
   };
 
   return (
-    <div className="relative flex flex-col h-screen w-full bg-background-light dark:bg-background-dark overflow-hidden">
+    <div className="relative grid h-screen w-full grid-rows-[auto,1fr,auto] bg-background-light dark:bg-background-dark overflow-hidden">
       <Header />
-      <div className="flex-1 w-full flex items-center justify-center min-h-0">
-        <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 md:px-10 lg:px-16 h-full flex items-center justify-center">
-          <main className="w-full flex flex-col items-center justify-center h-full">
-            <div className="text-center mb-10 sm:mb-12 px-2 flex-shrink-0 w-full">
-              <p className="text-xs sm:text-sm font-light tracking-[0.15em] text-text-light/50 dark:text-text-dark/50 mb-3">
+      <div className="w-full min-h-0 overflow-hidden">
+        <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 md:px-10 lg:px-16 h-full min-h-0">
+          <main className="w-full h-full min-h-0 flex flex-col items-center justify-center py-[clamp(8px,2vh,24px)]">
+            <div className="text-center mb-[clamp(12px,4vh,48px)] [@media(max-height:740px)]:mb-2 px-2 flex-shrink-0 w-full">
+              <p className="text-xs sm:text-sm font-light tracking-[0.15em] text-text-light/50 dark:text-text-dark/50 mb-3 [@media(max-height:740px)]:mb-1">
                 {t.servicios.tagline}
               </p>
               <p className="text-sm sm:text-base font-light text-text-light/70 dark:text-text-dark/70 max-w-2xl mx-auto leading-relaxed">
@@ -140,7 +140,7 @@ export default function ServiciosPage() {
               </p>
             </div>
 
-            <div className="relative flex items-center justify-center w-full min-h-[240px] sm:min-h-[260px] md:min-h-[280px] lg:min-h-[300px]">
+            <div className="relative flex items-center justify-center w-full flex-shrink-0">
               {/* Navigation buttons */}
               <button
                 onClick={prevSlide}
@@ -155,7 +155,7 @@ export default function ServiciosPage() {
                 <span className="material-symbols-outlined text-xl sm:text-2xl md:text-3xl lg:text-4xl">chevron_left</span>
               </button>
 
-              <div className="overflow-hidden w-full h-full min-h-[240px] sm:min-h-[260px] md:min-h-[280px] lg:min-h-[300px]">
+              <div className="overflow-hidden w-full">
                 <div
                   className="flex transition-transform duration-500 ease-in-out h-full"
                   style={{
@@ -174,15 +174,15 @@ export default function ServiciosPage() {
                             className="flex-shrink-0 h-full"
                             style={{ width: cardWidth }}
                           >
-                            <div className="group flex flex-col items-center justify-center gap-2 sm:gap-3 md:gap-4 h-full min-h-[240px] sm:min-h-[260px] md:min-h-[280px] lg:min-h-[300px] p-4 sm:p-5 md:p-6 transition-all duration-300">
+                            <div className="group flex flex-col items-center justify-start gap-[clamp(6px,1.6vh,16px)] h-full px-4 sm:px-5 md:px-6 py-[clamp(8px,2vh,24px)] transition-all duration-300">
                               <div className="text-primary/70 group-hover:text-primary flex-shrink-0 transition-colors duration-300">
                                 {renderIcon(servicio.icono)}
                               </div>
                               <div className="flex justify-center">
                                 <div className="w-8 h-px bg-primary/20 group-hover:w-12 transition-all duration-300"></div>
                               </div>
-                              <div className="text-center w-full flex-1 flex flex-col justify-center">
-                                <h2 className="text-sm sm:text-base md:text-lg font-light tracking-[0.1em] text-text-light dark:text-text-dark mb-2 sm:mb-3">
+                              <div className="text-center w-full flex-1 flex flex-col justify-start">
+                                <h2 className="text-sm sm:text-base md:text-lg font-light tracking-[0.1em] text-text-light dark:text-text-dark mb-[clamp(4px,1.2vh,12px)]">
                                   {servicio.titulo}
                                 </h2>
                                 <p className="text-xs sm:text-sm font-light text-text-light/50 dark:text-text-dark/50 leading-relaxed px-1 sm:px-2">
@@ -212,7 +212,7 @@ export default function ServiciosPage() {
               </button>
             </div>
 
-            <div className="flex justify-center items-center gap-1.5 sm:gap-2 mb-4 flex-shrink-0 w-full">
+            <div className="flex justify-center items-center gap-1.5 sm:gap-2 mt-[clamp(4px,1.5vh,16px)] flex-shrink-0 w-full">
               {Array.from({ length: totalPages }).map((_, idx) => (
                 <button
                   key={idx}
@@ -228,12 +228,12 @@ export default function ServiciosPage() {
             </div>
 
             {/* Separator */}
-            <div className="flex justify-center my-6 sm:my-8 flex-shrink-0 w-full">
+            <div className="flex justify-center my-[clamp(12px,3.5vh,32px)] [@media(max-height:740px)]:my-3 flex-shrink-0 w-full">
               <div className="w-[30%] h-px bg-primary/20"></div>
             </div>
 
             <div className="text-center px-2 flex-shrink-0 w-full">
-              <p className="text-sm sm:text-base font-light text-text-light/60 dark:text-text-dark/60 mb-4 max-w-xl mx-auto leading-relaxed">
+              <p className="text-sm sm:text-base font-light text-text-light/60 dark:text-text-dark/60 mb-[clamp(8px,2vh,16px)] max-w-xl mx-auto leading-relaxed [@media(max-height:740px)]:hidden">
                 {t.servicios.ctaTexto}
               </p>
               <Link
