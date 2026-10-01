@@ -6,11 +6,29 @@ import { useProjects } from '../hooks/useProjects';
 import { usePageSEO } from '../hooks/usePageSEO';
 import { useLanguage } from '../contexts/LanguageContext';
 
+// Iconos Material Symbols Outlined (FILL 0, wght 400, GRAD 0, opsz 24) como SVG en línea,
+// mismo patrón que ServiciosPage (sin depender de la carga de la fuente de iconos).
 const CATEGORIAS = [
-  { nombre: 'Residencial', imagen: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800' },
-  { nombre: 'Infantil', imagen: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800' },
-  { nombre: 'Comercial', imagen: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800' },
-  { nombre: 'Corporativo', imagen: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800' },
+  {
+    nombre: 'Residencial',
+    icono: 'home',
+    path: 'M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z',
+  },
+  {
+    nombre: 'Infantil',
+    icono: 'cruelty_free',
+    path: 'M380-80q-75 0-127.5-52.5T200-260q0-35 17-64.5t63-75.5q6-6 11.5-12.5T306-430q-51-78-78.5-163.5T200-760q0-58 21-89t59-31q57 0 102 55t68 101q9 20 16.5 40.5T480-641q6-22 13.5-42.5T511-724q22-46 67-101t102-55q38 0 59 31t21 89q0 81-27.5 166.5T654-430q9 11 14.5 17.5T680-400q46 46 63 75.5t17 64.5q0 75-52.5 127.5T580-80q-45 0-72.5-10L480-100l-27.5 10Q425-80 380-80Zm0-80q23 0 46-5.5t43-16.5q-11-5-20-17t-9-21q0-8 11.5-14t28.5-6q17 0 28.5 6t11.5 14q0 9-9 21t-20 17q20 11 43 16.5t46 5.5q42 0 71-29t29-71q0-18-10-35t-30-34q-14-12-23-21t-29-34q-29-35-48-45.5T480-440q-41 0-60.5 10.5T372-384q-20 25-29 34t-23 21q-20 17-30 34t-10 35q0 42 29 71t71 29Zm40-130q-8 0-14-9t-6-21q0-12 6-21t14-9q8 0 14 9t6 21q0 12-6 21t-14 9Zm120 0q-8 0-14-9t-6-21q0-12 6-21t14-9q8 0 14 9t6 21q0 12-6 21t-14 9ZM363-489q11-8 25-14t31-11q-2-48-14.5-95.5T373-696q-19-40-42-67.5T285-799q-2 6-3.5 15.5T280-760q0 68 21.5 138T363-489Zm234 0q40-63 61.5-133T680-760q0-14-1.5-23.5T675-799q-23 8-46 35.5T587-696q-18 39-30.5 86.5T541-514q15 4 29 10.5t27 14.5Z',
+  },
+  {
+    nombre: 'Comercial',
+    icono: 'storefront',
+    path: 'M841-518v318q0 33-23.5 56.5T761-120H201q-33 0-56.5-23.5T121-200v-318q-23-21-35.5-54t-.5-72l42-136q8-26 28.5-43t47.5-17h556q27 0 47 16.5t29 43.5l42 136q12 39-.5 71T841-518Zm-272-42q27 0 41-18.5t11-41.5l-22-140h-78v148q0 21 14 36.5t34 15.5Zm-180 0q23 0 37.5-15.5T441-612v-148h-78l-22 140q-4 24 10.5 42t37.5 18Zm-178 0q18 0 31.5-13t16.5-33l22-154h-78l-40 134q-6 20 6.5 43t41.5 23Zm540 0q29 0 42-23t6-43l-42-134h-76l22 154q3 20 16.5 33t31.5 13ZM201-200h560v-282q-5 2-6.5 2H751q-27 0-47.5-9T663-518q-18 18-41 28t-49 10q-27 0-50.5-10T481-518q-17 18-39.5 28T393-480q-29 0-52.5-10T299-518q-21 21-41.5 29.5T211-480h-4.5q-2.5 0-5.5-2v282Zm560 0H201h560Z',
+  },
+  {
+    nombre: 'Corporativo',
+    icono: 'desktop_mac',
+    path: 'M320-120v-40l80-80H160q-33 0-56.5-23.5T80-320v-440q0-33 23.5-56.5T160-840h640q33 0 56.5 23.5T880-760v440q0 33-23.5 56.5T800-240H560l80 80v40H320ZM160-440h640v-320H160v320Zm0 0v-320 320Z',
+  },
 ];
 
 export default function ProyectosPage() {
@@ -156,23 +174,38 @@ export default function ProyectosPage() {
               </div>
             )}
 
-            {/* Mostrar categorías cuando NO hay filtro */}
+            {/* Mostrar categorías cuando NO hay filtro.
+                Misma retícula y proporción que el listado de proyectos (ancho completo, 2 col. móvil / 4 col. desktop)
+                para que la transición categoría → proyectos sea continua. */}
             {showCategories && (
-              <div className="flex-1 grid place-items-center">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(16px,3vw,32px)] place-items-center justify-center">
+              <div className="flex-1 flex flex-col justify-center w-full">
+                <div className="grid w-full grid-cols-2 md:grid-cols-4 gap-[clamp(16px,3vw,32px)]">
                   {CATEGORIAS.map((cat) => (
                     <Link
                       key={cat.nombre}
                       to={`/proyectos?categoria=${cat.nombre}`}
                       className="group w-full flex flex-col"
                     >
-                      <div className="overflow-hidden rounded-lg w-full aspect-square md:aspect-[2/3]">
-                        <img
-                          src={cat.imagen}
-                          alt={cat.nombre}
-                          className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-                          loading="lazy"
-                        />
+                      <div className="relative overflow-hidden rounded-lg w-full aspect-square md:aspect-[2/3] flex items-center justify-center bg-primary/[0.04] dark:bg-primary/[0.10]">
+                        {/* Halo difuminado detrás del icono */}
+                        <div
+                          aria-hidden="true"
+                          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 aspect-square rounded-full bg-primary/20 blur-3xl transition-all duration-700 ease-out group-hover:scale-125 group-hover:bg-primary/30"
+                        ></div>
+                        {/* Degradado inferior suave para dar profundidad */}
+                        <div
+                          aria-hidden="true"
+                          className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-primary/10 to-transparent"
+                        ></div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 -960 960 960"
+                          fill="currentColor"
+                          aria-hidden="true"
+                          className="relative w-[clamp(2.25rem,4.5vw,4rem)] h-[clamp(2.25rem,4.5vw,4rem)] text-primary/80 group-hover:text-primary transition-all duration-500 ease-out group-hover:scale-110"
+                        >
+                          <path d={cat.path} />
+                        </svg>
                       </div>
                       <div className="mt-3 flex flex-col items-center">
                         <span className="text-sm font-light tracking-[0.15em] text-text-light/70 dark:text-text-dark/70 group-hover:text-text-light dark:group-hover:text-text-dark transition-colors duration-300">
